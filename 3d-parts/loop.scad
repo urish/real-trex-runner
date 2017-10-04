@@ -12,6 +12,11 @@ lip_inset = 2.5;
 mount_cube_height = 15;
 inner_radius = outer_radius - tunnel_width - wall_width * 2;
 
+module copy_mirror(vec=[0,1,0]) { 
+    children(); 
+    mirror(vec) children(); 
+}
+
 module tunnel() {
     difference() {
         union() {
@@ -55,17 +60,7 @@ module tunnel() {
     }
 }
 
-module mounting(slope) {
-    if (slope)
-    translate([0,inner_radius,0])
-    scale([3,1,1])
-    difference() {
-        cylinder(r=3,h=tunnel_height);
-
-        translate([-10,-5,-1])
-        cube([10,10,tunnel_height+2]);
-    };
-
+module mounting() {
     translate([0,inner_radius-5.6,0])
         cube([10,5.4,mount_cube_height]);
 
@@ -73,7 +68,7 @@ module mounting(slope) {
         cube([5,6,mount_cube_height]);
 }
 
-module mounting_holes(bolt_inset=2.5) {
+module mounting_holes() {
     translate([2+1.7,inner_radius+3,7])
     rotate([90,0,0])
     cylinder(r=1.7,h=10);
@@ -89,17 +84,32 @@ module mounting_holes(bolt_inset=2.5) {
 
     translate([2+1.7,inner_radius+tunnel_width+3,7])
     rotate([90,0,0])
-    cylinder(r=3,2,h=bolt_inset+tunnel_width);
+    cylinder(r=3,2,h=5.5+tunnel_width);
+}
+
+module leg_mounting() {
+    rotate([0,0,10])
+    translate([inner_radius-5,0,0])
+    difference() {
+        translate([0,-5,0])
+        cube([5,10,5]);
+        
+        translate([2.5,0,0])
+        cylinder(r=1.7,h=10);
+    }
 }
 
 difference() {
     union() {
         tunnel();
-        mounting(slope=true);
         
-        mirror([0,1,0]) mounting();
+        copy_mirror([0,1,0])
+        mounting();
+        
+        copy_mirror([0,1,0])       
+        leg_mounting();
     }
     
+    copy_mirror([0,1,0])       
     mounting_holes();
-    mirror([0,1,0]) mounting_holes(bolt_inset=5.5);
 }
