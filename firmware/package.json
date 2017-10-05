@@ -1,0 +1,13 @@
+{
+  "name": "firmware",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest -w"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1"
+  }
+}
