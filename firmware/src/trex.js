@@ -21,7 +21,7 @@ function setName(name) {
   const eirEntry = (type, data) => [data.length + 1, type].concat(data);
   NRF.setScanResponse([
     eirEntry(0x9, name),
-    eirEntry(0x6, [0x9e,0xca,0xdc,0x24,0x0e,0xe5,0xa9,0xe0,0x93,0xf3,0xa3,0xb5,0x01,0x00,0x40,0x6e])
+    eirEntry(0x6, [0x9e, 0xca, 0xdc, 0x24, 0x0e, 0xe5, 0xa9, 0xe0, 0x93, 0xf3, 0xa3, 0xb5, 0x01, 0x00, 0x40, 0x6e])
   ]);
 }
 
@@ -40,16 +40,39 @@ function playSound(id, volume) {
   setTimeout(() => playerCommand(0x12, 0, id), 20);
 }
 
+let currentSpeed = 0;
 function stopMotors() {
+  currentSpeed = 0;
   digitalWrite(MOTOR_ENA, 0);
 }
 
 function startMotors() {
+  currentSpeed = 0;
+  setSpeed(DEFAULT_SPEED);
   digitalWrite(MOTOR_ENA, 1);
 }
 
+let speedTimer = null;
 function setSpeed(speed) {
-  analogWrite(MOTOR_STEP, 0.5, {freq: speed});
+  const delta = 50;
+  function removeTimer() {
+      clearInterval(speedTimer);
+      speedTimer = null;
+  }
+  if (speedTimer) {
+    removeTimer();
+  }
+  speedTimer = setInterval(() => {
+    if (currentSpeed > speed) {
+      currentSpeed = Math.max(speed, currentSpeed - delta);
+    } else {
+      currentSpeed = Math.min(speed, currentSpeed + delta);
+    }
+    analogWrite(MOTOR_STEP, 0.5, { freq: currentSpeed });
+    if (currentSpeed === speed) {
+      removeTimer();
+    }
+  }, 10);
 }
 
 function jump() {
@@ -76,10 +99,10 @@ function onClick() {
 }
 
 function onInit() {
-  NRF.setAdvertising([0x03, 0x03, 0xFE, 0xFE], {name:"t-rex"});
+  NRF.setAdvertising([0x03, 0x03, 0xFE, 0xFE], { name: "t-rex" });
 
   // Serial for DFPlayer Mini
-  Serial1.setup(9600, {tx: D31, rx: D30});
+  Serial1.setup(9600, { tx: D31, rx: D30 });
   setTimeout(() => playSound(SOUND_LEVELUP, 16), 2000);
 
   // Set up motor
