@@ -5,10 +5,11 @@
  */
 
 SERVO_PIN = D12;
-BUTTON_PIN = D4;
 MOTOR_DIR = D0;
 MOTOR_STEP = D1;
 MOTOR_ENA = D2;
+BUTTON_PIN = D11;
+HALL_SENSOR_PIN = D23;
 DFPLAYER_PIN = D30;
 
 SOUND_JUMP = 1;
@@ -17,7 +18,10 @@ DEFAULT_SPEED = 8000;
 
 DEVICE_NAME = 't-rex';
 
-let servo = require("servo").connect(SERVO_PIN);
+const servo = require('servo').connect(SERVO_PIN);
+const assets = require('./assets');
+const display = require('./display');
+
 let playing = false;
 
 function playerCommand(cmd, arg1, arg2) {
@@ -51,8 +55,8 @@ let speedTimer = null;
 function setSpeed(speed) {
   const delta = 50;
   function removeTimer() {
-      clearInterval(speedTimer);
-      speedTimer = null;
+    clearInterval(speedTimer);
+    speedTimer = null;
   }
   if (speedTimer) {
     removeTimer();
@@ -93,11 +97,25 @@ function onClick() {
   }
 }
 
+let counter = 0;
+function count() {
+  counter++;
+  let ypos = 0;
+  let num = counter;
+  while (num > 0) {
+    const digit = num % 10;
+    num = Math.floor(num / 10);
+    display.writeChar(assets.digits[digit], 24, 19, ypos);
+    ypos += 24;
+  }
+  display.displayFrame();
+}
+
 function onInit() {
   const eirEntry = (type, data) => [data.length + 1, type].concat(data);
   NRF.setAdvertising([].concat(
     eirEntry(0x3, [0xfe, 0xfe]),
-    eirEntry(0x9, DEVICE_NAME),
+    eirEntry(0x9, DEVICE_NAME)
   ), { name: DEVICE_NAME });
 
   // Serial for DFPlayer Mini
@@ -136,4 +154,16 @@ function onInit() {
       }
     }
   });
+
+  // Display
+  display.start();
+  display.initModule(display.LUT_PARTIAL_UPDATE).then(() => {
+    display.clsw();
+    writeChar(assets.trex, 40, 35, 100, 32);
+    writeChar(assets.trex, 40, 35, 160, 64);
+    display.displayFrame();
+  });
+  setWatch(count, HALL_SENSOR_PIN, { repeat: true, edge: 'falling', debounce: 100 });
 }
+
+global.onInit = onInit;
