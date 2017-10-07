@@ -9,10 +9,11 @@ BUTTON_PIN = D4;
 MOTOR_DIR = D0;
 MOTOR_STEP = D1;
 MOTOR_ENA = D2;
+DFPLAYER_PIN = D30;
 
 SOUND_JUMP = 1;
 SOUND_LEVELUP = 2;
-DEFAULT_SPEED = 2000;
+DEFAULT_SPEED = 8000;
 
 let servo = require("servo").connect(SERVO_PIN);
 let playing = false;
@@ -102,7 +103,7 @@ function onInit() {
   NRF.setAdvertising([0x03, 0x03, 0xFE, 0xFE], { name: "t-rex" });
 
   // Serial for DFPlayer Mini
-  Serial1.setup(9600, { tx: D31, rx: D30 });
+  Serial1.setup(9600, { tx: DFPLAYER_PIN, rx: D29 });
   setTimeout(() => playSound(SOUND_LEVELUP, 16), 2000);
 
   // Set up motor
