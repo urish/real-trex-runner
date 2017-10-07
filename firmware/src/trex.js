@@ -15,16 +15,10 @@ SOUND_JUMP = 1;
 SOUND_LEVELUP = 2;
 DEFAULT_SPEED = 8000;
 
+DEVICE_NAME = 't-rex';
+
 let servo = require("servo").connect(SERVO_PIN);
 let playing = false;
-
-function setName(name) {
-  const eirEntry = (type, data) => [data.length + 1, type].concat(data);
-  NRF.setScanResponse([
-    eirEntry(0x9, name),
-    eirEntry(0x6, [0x9e, 0xca, 0xdc, 0x24, 0x0e, 0xe5, 0xa9, 0xe0, 0x93, 0xf3, 0xa3, 0xb5, 0x01, 0x00, 0x40, 0x6e])
-  ]);
-}
 
 function playerCommand(cmd, arg1, arg2) {
   const data = [0x7e, 0xff, 0x6, cmd, 0, arg1, arg2, 0, 0, 0xef];
@@ -78,7 +72,7 @@ function setSpeed(speed) {
 
 function jump() {
   playSound(SOUND_JUMP, 30);
-  servo.move(0.55, 4000);
+  servo.move(0.55, 1700);
 }
 
 function startGame() {
@@ -100,7 +94,11 @@ function onClick() {
 }
 
 function onInit() {
-  NRF.setAdvertising([0x03, 0x03, 0xFE, 0xFE], { name: "t-rex" });
+  const eirEntry = (type, data) => [data.length + 1, type].concat(data);
+  NRF.setAdvertising([].concat(
+    eirEntry(0x3, [0xfe, 0xfe]),
+    eirEntry(0x9, DEVICE_NAME),
+  ), { name: DEVICE_NAME });
 
   // Serial for DFPlayer Mini
   Serial1.setup(9600, { tx: DFPLAYER_PIN, rx: D29 });
@@ -116,7 +114,7 @@ function onInit() {
   setWatch(onClick, BUTTON_PIN, { edge: 'falling', repeat: true, debounce: 200 });
 
   // Servo
-  servo.move(0.95, 300);
+  servo.move(0.55, 300);
 
   // Bluetooth
   NRF.setServices({
