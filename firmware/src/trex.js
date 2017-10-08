@@ -79,17 +79,19 @@ function setSpeed(speed) {
   }, 10);
 }
 
-function updateScore() {
-  score++;
+function displayScore() {
   let ypos = 0;
   let num = score;
+  if (num === 0) {
+    display.writeChar(assets.digits[0], 24, 19, 0);    
+  }
   while (num > 0) {
     const digit = num % 10;
     num = Math.floor(num / 10);
     display.writeChar(assets.digits[digit], 24, 19, ypos);
     ypos += 24;
   }
-  display.displayFrame();
+  return display.displayFrame();
 }
 
 function jump() {
@@ -101,7 +103,11 @@ function jump() {
 
 function startGame() {
   startMotors();
-  display.clsw();
+  display.fillMemory(0xff);
+  display.displayFrame().then(() => {
+    display.fillMemory(0xff);
+    return displayScore();
+  });
   score = 0;
   playing = true;
   jumping = false;
@@ -122,7 +128,8 @@ function onClick() {
 
 function onCactus() {
   if (jumping) {
-    updateScore();
+    score++;
+    displayScore();
   } else {
     playSound(SOUND_GAMEOVER, 30);
     endGame();
@@ -176,10 +183,11 @@ function onInit() {
   // Display
   display.start();
   display.initModule(display.LUT_PARTIAL_UPDATE).then(() => {
-    display.clsw();
-    display.writeChar(assets.trex, 40, 35, 100, 32);
-    display.writeChar(assets.trex, 40, 35, 160, 64);
-    display.displayFrame();
+    display.clsw().then(() => {
+      display.writeChar(assets.trex, 40, 35, 100, 32);
+      display.writeChar(assets.trex, 40, 35, 160, 64);
+      display.displayFrame();
+    });
   });
 
   // Magnetic Sensor

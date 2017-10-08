@@ -103,7 +103,12 @@ function initModule(lut) {
 }
 
 function waitReady() {
-  while (digitalRead(BUSY_PIN));
+  return new Promise(resolve => {
+    if (!digitalRead(BUSY_PIN)) {
+      resolve();
+    };
+    setWatch(resolve, BUSY_PIN);
+  });
 }
 
 function displayFrame() {
@@ -111,7 +116,7 @@ function displayFrame() {
   sendData(0xC4);
   sendCommand(MASTER_ACTIVATION);
   sendCommand(TERMINATE_FRAME_READ_WRITE);
-  waitReady();
+  return waitReady();
 }
 
 function setMemoryArea(x, y, xEnd, yEnd) {
@@ -145,18 +150,24 @@ function fillMemory(value) {
 
 function cls() {
   fillMemory(0);
-  displayFrame();
-  fillMemory(0xff);
-  displayFrame();
+  return displayFrame()
+    .then(() => {
+      fillMemory(0xff);
+      return displayFrame();
+    });
 }
 
 function clsw() {
   fillMemory(0);
-  displayFrame();
-  fillMemory(0xff);
-  displayFrame();
-  fillMemory(0xff);
-  displayFrame();
+  return displayFrame()
+    .then(() => {
+      fillMemory(0xff);
+      return displayFrame();
+    })
+    .then(() => {
+      fillMemory(0xff);
+      return displayFrame();    
+    });
 }
 
 function writeChar(buf, w, h, offs, x) {
