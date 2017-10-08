@@ -143,9 +143,11 @@ function fillMemory(value) {
   setMemoryArea(0, 0, EPD_WIDTH - 1, EPD_HEIGHT - 1);
   setMemoryPointer(0, 0);
   sendCommand(WRITE_RAM);
-  let buf = new Uint8Array(EPD_WIDTH / 8 * EPD_HEIGHT);
+  let buf = new Uint8Array(EPD_WIDTH / 8 * EPD_HEIGHT / 32);
   buf.fill(value, 0, buf.length);
-  sendData(buf);
+  for (let i = 0; i < 32; i++) {
+    sendData(buf);    
+  }
 }
 
 function cls() {
