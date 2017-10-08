@@ -47,6 +47,7 @@ let currentSpeed = 0;
 function stopMotors() {
   currentSpeed = 0;
   digitalWrite(MOTOR_ENA, 0);
+  digitalWrite(MOTOR_STEP, 0);
 }
 
 function startMotors() {
@@ -180,6 +181,9 @@ function onInit() {
     display.writeChar(assets.trex, 40, 35, 160, 64);
     display.displayFrame();
   });
+
+  // Magnetic Sensor
+  pinMode(HALL_SENSOR_PIN, 'input_pullup');
   setWatch(onCactus, HALL_SENSOR_PIN, { repeat: true, edge: 'falling', debounce: 100 });
 }
 
