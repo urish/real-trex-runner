@@ -23,25 +23,11 @@ DEVICE_NAME = 't-rex';
 const servo = require('servo').connect(SERVO_PIN);
 const assets = require('./assets');
 const display = require('./display');
+const sound = require('./sound');
 
 let playing = false;
 let jumping = false;
 let score = 0;
-
-function playerCommand(cmd, arg1, arg2) {
-  const data = [0x7e, 0xff, 0x6, cmd, 0, arg1, arg2, 0, 0, 0xef];
-  const checksum = 0 - data[1] - data[2] - data[3] - data[4] - data[5] - data[6];
-  data[7] = (checksum >> 8) & 0xff;
-  data[8] = checksum & 0xff;
-  Serial1.write(data);
-}
-
-function playSound(id, volume) {
-  if (typeof volume !== 'undefined') {
-    playerCommand(0x6, 0, volume);
-  }
-  setTimeout(() => playerCommand(0x12, 0, id), 20);
-}
 
 let currentSpeed = 0;
 function stopMotors() {
@@ -109,7 +95,7 @@ function displayGameOver() {
 }
 
 function jump() {
-  playSound(SOUND_JUMP, 30);
+  sound.playSound(SOUND_JUMP, 30);
   jumping = true;
   servo.move(0.55, 1700);
   setTimeout(() => jumping = false, 1700);
@@ -145,7 +131,7 @@ function onCactus() {
     score++;
     displayScore();
   } else {
-    playSound(SOUND_GAMEOVER, 30);
+    sound.playSound(SOUND_GAMEOVER, 30);
     endGame();
     displayGameOver();
   }
@@ -159,8 +145,8 @@ function onInit() {
   ), { name: DEVICE_NAME });
 
   // Serial for DFPlayer Mini
-  Serial1.setup(9600, { tx: DFPLAYER_PIN, rx: D29 });
-  setTimeout(() => playSound(SOUND_LEVELUP, 16), 2000);
+  sound.init(DFPLAYER_PIN);
+  setTimeout(() => sound.playSound(SOUND_LEVELUP, 16), 2000);
 
   // Set up motor
   stopMotors();
