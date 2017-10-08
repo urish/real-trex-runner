@@ -126,11 +126,11 @@ function onClick() {
   }
 }
 
-function onCactus() {
+function onCactus(e) {
   if (jumping) {
     score++;
     displayScore();
-  } else {
+  } else if (playing) {
     sound.playSound(SOUND_GAMEOVER, 30);
     endGame();
     displayGameOver();
@@ -192,8 +192,7 @@ function onInit() {
   });
 
   // Magnetic Sensor
-  pinMode(HALL_SENSOR_PIN, 'input_pullup');
-  setWatch(onCactus, HALL_SENSOR_PIN, { repeat: true, edge: 'falling', debounce: 100 });
+  setWatch(onCactus, HALL_SENSOR_PIN, { repeat: true, edge: 'rising' });
 }
 
 global.onInit = onInit;
