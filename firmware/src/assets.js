@@ -17,4 +17,4 @@ exports.digits = [
 ];
 
 // 40x35
-exports.trex = decodeBase64("//wA/////4D/////wD/////gP////+AP////+AP////4A/////gB////+AH////gAAP//+AAG///wAAb///AAH///wAAf///AAH///8AAf///AAAf//8AAB/wAAAAAPAAAAD+4AAAAP7mAAAD/+YAAAP/4AAAH//gAAAf/+AA9///4Az3///gDPH//+AM////4Az////gDP///+AM////4A/////wD/////AP////w==");
+exports.trex = decodeBase64("//wA/////4D/////wD/////gP////+AP////+AP////4A/////gB////+AH////gAAP//+AAG///wAAb///AAH///wAAf///AAH///8AAf///AAAf//8AAB/wAAAAAPAAAAD+4AAAAP7mAAAD/+YAAAP/4AAAH//gAAAf/+AA9///4Az3///gDPH//+AM////4Az////gDP///+AM////4A/////wD/////AP////w");
