@@ -23,6 +23,8 @@ const assets = require('./assets');
 const display = require('./display');
 
 let playing = false;
+let jumping = false;
+let score = 0;
 
 function playerCommand(cmd, arg1, arg2) {
   const data = [0x7e, 0xff, 0x6, cmd, 0, arg1, arg2, 0, 0, 0xef];
@@ -74,14 +76,32 @@ function setSpeed(speed) {
   }, 10);
 }
 
+function updateScore() {
+  score++;
+  let ypos = 0;
+  let num = score;
+  while (num > 0) {
+    const digit = num % 10;
+    num = Math.floor(num / 10);
+    display.writeChar(assets.digits[digit], 24, 19, ypos);
+    ypos += 24;
+  }
+  display.displayFrame();
+}
+
 function jump() {
   playSound(SOUND_JUMP, 30);
+  jumping = true;
   servo.move(0.55, 1700);
+  setTimeout(() => jumping = false, 1700);
 }
 
 function startGame() {
   startMotors();
+  display.clsw();
+  score = 0;
   playing = true;
+  jumping = false;
 }
 
 function endGame() {
@@ -97,18 +117,12 @@ function onClick() {
   }
 }
 
-let counter = 0;
-function count() {
-  counter++;
-  let ypos = 0;
-  let num = counter;
-  while (num > 0) {
-    const digit = num % 10;
-    num = Math.floor(num / 10);
-    display.writeChar(assets.digits[digit], 24, 19, ypos);
-    ypos += 24;
+function onCactus() {
+  if (jumping) {
+    updateScore();
+  } else {
+    endGame();
   }
-  display.displayFrame();
 }
 
 function onInit() {
@@ -129,7 +143,7 @@ function onInit() {
 
   // Button
   pinMode(BUTTON_PIN, 'input_pullup');
-  setWatch(onClick, BUTTON_PIN, { edge: 'falling', repeat: true, debounce: 200 });
+  setWatch(onClick, BUTTON_PIN, { edge: 'falling', repeat: true, debounce: 10 });
 
   // Servo
   servo.move(0.55, 300);
@@ -159,11 +173,11 @@ function onInit() {
   display.start();
   display.initModule(display.LUT_PARTIAL_UPDATE).then(() => {
     display.clsw();
-    writeChar(assets.trex, 40, 35, 100, 32);
-    writeChar(assets.trex, 40, 35, 160, 64);
+    display.writeChar(assets.trex, 40, 35, 100, 32);
+    display.writeChar(assets.trex, 40, 35, 160, 64);
     display.displayFrame();
   });
-  setWatch(count, HALL_SENSOR_PIN, { repeat: true, edge: 'falling', debounce: 100 });
+  setWatch(onCactus, HALL_SENSOR_PIN, { repeat: true, edge: 'falling', debounce: 100 });
 }
 
 global.onInit = onInit;

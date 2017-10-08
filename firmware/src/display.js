@@ -151,6 +151,8 @@ function cls() {
 }
 
 function clsw() {
+  fillMemory(0);
+  displayFrame();
   fillMemory(0xff);
   displayFrame();
   fillMemory(0xff);
