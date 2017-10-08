@@ -14,6 +14,8 @@ DFPLAYER_PIN = D30;
 
 SOUND_JUMP = 1;
 SOUND_LEVELUP = 2;
+SOUND_GAMEOVER = 3;
+
 DEFAULT_SPEED = 8000;
 
 DEVICE_NAME = 't-rex';
@@ -121,6 +123,7 @@ function onCactus() {
   if (jumping) {
     updateScore();
   } else {
+    playSound(SOUND_GAMEOVER, 30);
     endGame();
   }
 }
