@@ -94,6 +94,20 @@ function displayScore() {
   return display.displayFrame();
 }
 
+function displayGameOver() {
+  let ypos = 240;
+  let str = 'GAME';
+  for (let i = 0; i < str.length; i++) {
+    display.writeChar(assets.letters[str[i]], 24, 21, ypos - i * 30, 24);
+  }
+
+  str = 'OVER';
+  for (let i = 0; i < str.length; i++) {
+    display.writeChar(assets.letters[str[i]], 24, 21, ypos - i * 30, 64);
+  }
+  return display.displayFrame();
+}
+
 function jump() {
   playSound(SOUND_JUMP, 30);
   jumping = true;
@@ -133,6 +147,7 @@ function onCactus() {
   } else {
     playSound(SOUND_GAMEOVER, 30);
     endGame();
+    displayGameOver();
   }
 }
 
