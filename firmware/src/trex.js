@@ -8,6 +8,9 @@ SERVO_PIN = D12;
 MOTOR_DIR = D0;
 MOTOR_STEP = D1;
 MOTOR_ENA = D2;
+POT_VCC_PIN = D3;
+POT_PIN = D4;
+POT_GND_PIN = D5;
 BUTTON_PIN = D11;
 HALL_SENSOR_PIN = D23;
 DFPLAYER_PIN = D30;
@@ -16,6 +19,8 @@ SOUND_JUMP = 1;
 SOUND_LEVELUP = 2;
 SOUND_GAMEOVER = 3;
 
+MIN_SPEED = 2000;
+MAX_SPEED = 18000;
 DEFAULT_SPEED = 8000;
 
 DEVICE_NAME = 't-rex';
@@ -193,6 +198,14 @@ function onInit() {
 
   // Magnetic Sensor
   setWatch(onCactus, HALL_SENSOR_PIN, { repeat: true, edge: 'rising' });
+
+  // Potentiometer
+  digitalWrite(POT_VCC_PIN, 1);
+  digitalWrite(POT_GND_PIN, 0);
+  pinMode(POT_PIN, 'analog');
+  setInterval(() => {
+    setSpeed(MIN_SPEED + (MAX_SPEED - MIN_SPEED) * analogRead(D4));
+  }, 100);
 }
 
 global.onInit = onInit;
