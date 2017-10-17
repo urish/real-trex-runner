@@ -4,7 +4,6 @@
  * Copyright (C) 2017, Uri Shaked
  */
 
-SERVO_PIN = D12;
 MOTOR_DIR = D0;
 MOTOR_STEP = D1;
 MOTOR_ENA = D2;
@@ -20,14 +19,15 @@ SOUND_LEVELUP = 2;
 SOUND_GAMEOVER = 3;
 
 MIN_SPEED = 2000;
-MAX_SPEED = 18000;
+MAX_SPEED = 28000;
 DEFAULT_SPEED = 8000;
 
 DEVICE_NAME = 't-rex';
 
-const servo = require('servo').connect(SERVO_PIN);
 const assets = require('./assets');
+const button = require('./button');
 const display = require('./display');
+const jump = require('./jump');
 const sound = require('./sound');
 
 let playing = false;
@@ -99,11 +99,16 @@ function displayGameOver() {
   return display.displayFrame();
 }
 
-function jump() {
+function doJump() {
+  if (jumping) {
+    // TODO support long jump?
+    return;
+  }
   sound.playSound(SOUND_JUMP, 30);
   jumping = true;
-  servo.move(0.55, 1700);
-  setTimeout(() => jumping = false, 1700);
+  jump.jump();
+  setTimeout(() => jump.goDown(), 500);
+  setTimeout(() => jumping = false, 800);
 }
 
 function startGame() {
@@ -125,7 +130,7 @@ function endGame() {
 
 function onClick() {
   if (playing) {
-    jump();
+    doJump();
   } else {
     startGame();
   }
@@ -161,9 +166,8 @@ function onInit() {
   // Button
   pinMode(BUTTON_PIN, 'input_pullup');
   setWatch(onClick, BUTTON_PIN, { edge: 'falling', repeat: true, debounce: 10 });
-
-  // Servo
-  servo.move(0.55, 300);
+  button.init(onClick);
+  jump.init();
 
   // Bluetooth
   NRF.setServices({
