@@ -8,9 +8,9 @@ DOWN = 0;
 function jump() {
   digitalWrite(JUMP_DIR, UP);
   digitalWrite(JUMP_ENA, 1);
-  for (i = 0; i < 20; i++) {
-    setTimeout(((i) => () => analogWrite(JUMP_STEP, 0.5, { freq: 5000 + i * 1000 }))(i), i * 5);
-  }
+  analogWrite(JUMP_STEP, 0.5, { freq: 5000 });
+  setTimeout(() => analogWrite(JUMP_STEP, 0.5, { freq: 7000 }), 30);
+  setTimeout(() => analogWrite(JUMP_STEP, 0.5, { freq: 10000 }), 60);
   setTimeout(() => digitalWrite(JUMP_ENA, 0), 180);
 }
 
