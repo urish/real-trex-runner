@@ -7,7 +7,7 @@ export default {
     file: 'dist/firmware.js',
     format: 'cjs',
   },
-  external: ['servo'],
+  external: ['Flash'],
   intro: 'const module={}',
   plugins: [
     commonjs(),
