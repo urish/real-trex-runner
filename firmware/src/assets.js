@@ -2,24 +2,24 @@
 const base = 389120;
 
 module.exports = {
-  0: E.memoryArea(base+0, 57), // 24x19
-  1: E.memoryArea(base+60, 57), // 24x19
-  2: E.memoryArea(base+120, 57), // 24x19
-  3: E.memoryArea(base+180, 57), // 24x19
-  4: E.memoryArea(base+240, 57), // 24x19
-  5: E.memoryArea(base+300, 57), // 24x19
-  6: E.memoryArea(base+360, 57), // 24x19
-  7: E.memoryArea(base+420, 57), // 24x19
-  8: E.memoryArea(base+480, 57), // 24x19
-  9: E.memoryArea(base+540, 57), // 24x19
-  A: E.memoryArea(base+600, 63), // 24x21
-  E: E.memoryArea(base+664, 63), // 24x21
-  G: E.memoryArea(base+728, 63), // 24x21
-  H: E.memoryArea(base+792, 63), // 24x21
-  I: E.memoryArea(base+856, 63), // 24x21
-  M: E.memoryArea(base+920, 63), // 24x21
-  O: E.memoryArea(base+984, 63), // 24x21
-  R: E.memoryArea(base+1048, 63), // 24x21
-  trex: E.memoryArea(base+1112, 175), // 40x35
-  V: E.memoryArea(base+1288, 63), // 24x21
+  0: E.memoryArea(base+0, 228), // 48x38
+  1: E.memoryArea(base+228, 228), // 48x38
+  2: E.memoryArea(base+456, 228), // 48x38
+  3: E.memoryArea(base+684, 228), // 48x38
+  4: E.memoryArea(base+912, 228), // 48x38
+  5: E.memoryArea(base+1140, 228), // 48x38
+  6: E.memoryArea(base+1368, 228), // 48x38
+  7: E.memoryArea(base+1596, 228), // 48x38
+  8: E.memoryArea(base+1824, 228), // 48x38
+  9: E.memoryArea(base+2052, 228), // 48x38
+  A: E.memoryArea(base+2280, 63), // 24x21
+  E: E.memoryArea(base+2344, 63), // 24x21
+  G: E.memoryArea(base+2408, 63), // 24x21
+  H: E.memoryArea(base+2472, 63), // 24x21
+  I: E.memoryArea(base+2536, 63), // 24x21
+  M: E.memoryArea(base+2600, 63), // 24x21
+  O: E.memoryArea(base+2664, 63), // 24x21
+  R: E.memoryArea(base+2728, 63), // 24x21
+  trex: E.memoryArea(base+2792, 175), // 40x35
+  V: E.memoryArea(base+2968, 63), // 24x21
 }

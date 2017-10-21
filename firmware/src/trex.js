@@ -71,16 +71,17 @@ function setSpeed(speed) {
 }
 
 function displayScore() {
+  const digitWidth = 48;
   let ypos = 48;
   let num = score;
   if (num === 0) {
-    display.writeChar(assets[0], 24, 19, ypos, 32);    
+    display.writeChar(assets[0], digitWidth, 19, ypos, 32);    
   }
   while (num > 0) {
     const digit = num % 10;
     num = Math.floor(num / 10);
-    display.writeChar(assets[digit], 24, 19, ypos, 32);
-    ypos += 24;
+    display.writeChar(assets[digit], digitWidth, 19, ypos, 32);
+    ypos += digitWidth;
   }
   return display.displayFrame();
 }
