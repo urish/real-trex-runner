@@ -33,6 +33,10 @@ describe('bitmap utils', () => {
     it('should convert the given bitmap into base64 representation', () => {
       expect(bitmap.encode(zeroBitmap)).toBe('/wB//wB/+AAP+AAP+AAPx/+Bx/+Bx/+Bx//xx//xwP/xwP/xwAAB+AAP+AAP/wB//wB//wB/////');
     });
+
+    it('should not pad the encoded string with = characters', () => {
+      expect(bitmap.encode([127, 53])).toEqual('fzU');
+    });
   });
 
   describe('decode', () => {
