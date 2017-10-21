@@ -1,39 +1,12 @@
 const fs = require('fs');
 const path = require('path');
-
-function toBitmap(str) {
-  const lines = str.split('\n');
-  let bitmap = [];
-  const firstLine = lines[0].replace(/[\r\n]*$/g, '');
-  let width = Math.round(firstLine.length / 8);
-  let idx = 0;
-  for (let line of lines) {
-    for (let i = 0; i < width; i++) {
-      let byte = 0;
-      for (let bit = 0; bit < 8; bit++) {
-        if (line[i * 8 + bit] === ' ') {
-          byte |= 1 << (7 - bit);
-        }
-      }
-      bitmap[idx++] = byte;
-    }
-  }
-  return {
-    bitmap,
-    width: firstLine.length,
-    height: lines.length,
-  };
-}
+const bitmap = require('./util/bitmap');
 
 function pad(bitmap) {
   while (bitmap.length % 4) {
     bitmap = [].concat(bitmap, [0]);
   }
   return bitmap;
-}
-
-function encode(bitmap) {
-  return new Buffer(new Uint8Array(bitmap)).toString('base64');
 }
 
 let outputFile = fs.openSync(path.resolve('dist', 'bitmaps.js'), 'w');
@@ -61,9 +34,9 @@ for (let fileName of fs.readdirSync('assets')) {
     const assetName = path.parse(fileName).name;
     const fullPath = path.resolve('assets', fileName);
     const bitmapData = fs.readFileSync(fullPath).toString();
-    const image = toBitmap(bitmapData);
+    const image = bitmap.toBitmap(bitmapData);
     const paddedBitmap = pad(image.bitmap);
-    const encoded = encode(paddedBitmap);
+    const encoded = bitmap.encode(paddedBitmap);
     fs.writeSync(outputFile,
       `flash.write(atob('${encoded}'), addr+${flashOffset});\n`);
     fs.writeSync(assetsOutputFile,
