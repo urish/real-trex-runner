@@ -63,7 +63,7 @@ function setSpeed(speed) {
     } else {
       currentSpeed = Math.min(speed, currentSpeed + delta);
     }
-    analogWrite(MOTOR_STEP, 0.5, { freq: currentSpeed });
+    analogWrite(MOTOR_STEP, 0.5, { freq: currentSpeed, soft: true });
     if (currentSpeed === speed) {
       removeTimer();
     }
