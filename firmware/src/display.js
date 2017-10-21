@@ -101,9 +101,13 @@ function initModule(lut) {
   });
 }
 
+function isBusy() {
+  return digitalRead(BUSY_PIN);
+}
+
 function waitReady() {
   return new Promise(resolve => {
-    if (!digitalRead(BUSY_PIN)) {
+    if (!isBusy()) {
       resolve();
     };
     setWatch(resolve, BUSY_PIN);
@@ -190,6 +194,7 @@ module.exports = {
   LUT_PARTIAL_UPDATE: LUT_PARTIAL_UPDATE,
   WIDTH: EPD_WIDTH,
   HEIGHT: EPD_HEIGHT,
+  isBusy: isBusy,
   fillMemory,
   cls: cls,
   clsw: clsw,
