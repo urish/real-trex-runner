@@ -1,4 +1,3 @@
-
 // Copyright (C) 2017, Uri Shaked
 // Loosely based on code samples provided by waveshare
 // License: MIT
