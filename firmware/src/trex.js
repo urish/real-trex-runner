@@ -27,12 +27,14 @@ DEVICE_NAME = 't-rex';
 const assets = require('./assets');
 const button = require('./button');
 const display = require('./display');
+const highscore = require('./highscore');
 const jump = require('./jump');
 const sound = require('./sound');
 
 let playing = false;
 let jumping = false;
 let score = 0;
+let high = 0;
 
 let currentSpeed = 0;
 function stopMotors() {
@@ -147,6 +149,7 @@ function onCactus(e) {
   if (jumping) {
     if (e.time - lastCactusTime > 0.1) {
       score++;
+      highscore.update(score);
       display.registerUpdate(displayScore);
       lastCactusTime = e.time;
     }
@@ -199,6 +202,8 @@ function onInit() {
       }
     }
   });
+
+  highscore.init();
 
   // Display
   display.start();
