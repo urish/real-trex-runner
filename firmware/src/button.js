@@ -3,10 +3,7 @@ let onClick = null;
 
 function connectButton() {
   NRF.requestDevice({ filters: [{ name: 't-rex-btn' }] })
-    .then(device => {
-      bulbDevice = device;
-      return device.gatt.connect();
-    })
+    .then(device => device.gatt.connect())
     .then(gatt => gatt.getPrimaryService('feff'))
     .then(service => service.getCharacteristic('fe01'))
     .then(char => {
