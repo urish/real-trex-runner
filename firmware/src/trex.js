@@ -129,6 +129,7 @@ function startGame() {
   playing = true;
   jumping = false;
   startTime = getTime();
+  lastCactusTime = 0;
 }
 
 function endGame() {
