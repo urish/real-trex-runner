@@ -145,7 +145,7 @@ function onCactus(e) {
   setTimeout(() => 
   setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising' }), 1); 
   if (jumping) {
-    if (e.time - lastCactusTime > 0.05) {
+    if (e.time - lastCactusTime > 0.1) {
       score++;
       display.registerUpdate(displayScore);
       lastCactusTime = e.time;
