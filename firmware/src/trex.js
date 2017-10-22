@@ -113,8 +113,10 @@ function doJump() {
   sound.playSound(SOUND_JUMP, 30);
   jumping = true;
   jump.jump();
-  setTimeout(() => jump.goDown(), 500);
-  setTimeout(() => jumping = false, 800);
+  setTimeout(() => {
+    jump.goDown()
+    jumping = false;
+  }, 1500);
 }
 
 function startGame() {
@@ -217,9 +219,9 @@ function onInit() {
   digitalWrite(POT_VCC_PIN, 1);
   digitalWrite(POT_GND_PIN, 0);
   pinMode(POT_PIN, 'analog');
-  setInterval(() => {
+/*  setInterval(() => {
     setSpeed(MIN_SPEED + (MAX_SPEED - MIN_SPEED) * analogRead(D4));
-  }, 100);
+  }, 100);*/
 }
 
 global.onInit = onInit;

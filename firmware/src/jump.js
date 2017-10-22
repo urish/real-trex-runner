@@ -8,17 +8,15 @@ DOWN = 0;
 function jump() {
   digitalWrite(JUMP_DIR, UP);
   digitalWrite(JUMP_ENA, 1);
-  analogWrite(JUMP_STEP, 0.5, { freq: 5000 });
-  setTimeout(() => analogWrite(JUMP_STEP, 0.5, { freq: 7000 }), 30);
-  setTimeout(() => analogWrite(JUMP_STEP, 0.5, { freq: 10000 }), 60);
-  setTimeout(() => digitalWrite(JUMP_ENA, 0), 180);
+  JUMP_STEP.stepper(8000, 4000);
+  setTimeout(() => digitalWrite(JUMP_ENA, 0), 500);
 }
 
 function goDown() {
-  analogWrite(JUMP_STEP, 0.5, { freq: 5000 });
   digitalWrite(JUMP_DIR, DOWN);
   digitalWrite(JUMP_ENA, 1);
-  setTimeout(() => digitalWrite(JUMP_ENA, 0), 180);
+  JUMP_STEP.stepper(8000, 3800);
+  setTimeout(() => digitalWrite(JUMP_ENA, 0), 500);
 }
 
 function init() {
