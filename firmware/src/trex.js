@@ -32,6 +32,7 @@ const jump = require('./jump');
 const sound = require('./sound');
 
 let playing = false;
+let startTime = null;
 let jumping = false;
 let score = 0;
 let high = 0;
@@ -44,7 +45,7 @@ function stopMotors() {
 }
 
 function startMotors() {
-  currentSpeed = 0;
+  currentSpeed = 2000;
   setSpeed(DEFAULT_SPEED);
   digitalWrite(MOTOR_ENA, 1);
 }
@@ -74,11 +75,11 @@ function setSpeed(speed) {
 
 function displayScore() {
   const digitWidth = 48;
-  
+
   let ypos = 48;
   let num = score;
   if (num === 0) {
-    display.writeChar(assets[0], digitWidth, 19, ypos, 32);    
+    display.writeChar(assets[0], digitWidth, 19, ypos, 32);
   }
   while (num > 0) {
     const digit = num % 10;
@@ -127,6 +128,7 @@ function startGame() {
   score = 0;
   playing = true;
   jumping = false;
+  startTime = getTime();
 }
 
 function endGame() {
@@ -144,8 +146,11 @@ function onClick() {
 
 let lastCactusTime = getTime();
 function onCactus(e) {
-  setTimeout(() => 
-  setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising' }), 1); 
+  setTimeout(() =>
+    setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising' }), 1);
+  if (startTime && (e.time - startTime) < 0.1) {
+    return;
+  }
   if (jumping) {
     if (e.time - lastCactusTime > 0.1) {
       score++;
@@ -222,9 +227,9 @@ function onInit() {
   digitalWrite(POT_VCC_PIN, 1);
   digitalWrite(POT_GND_PIN, 0);
   pinMode(POT_PIN, 'analog');
-/*  setInterval(() => {
-    setSpeed(MIN_SPEED + (MAX_SPEED - MIN_SPEED) * analogRead(D4));
-  }, 100);*/
+  /*  setInterval(() => {
+      setSpeed(MIN_SPEED + (MAX_SPEED - MIN_SPEED) * analogRead(D4));
+    }, 100);*/
 }
 
 global.onInit = onInit;
