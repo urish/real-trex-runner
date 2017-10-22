@@ -74,7 +74,7 @@ function displayScore() {
   const digitWidth = 48;
 
   if (display.isBusy()) {
-    return;
+    return Promise.resolve(null);
   }
   
   let ypos = 48;
@@ -146,11 +146,13 @@ function onClick() {
 
 let lastCactusTime = getTime();
 function onCactus(e) {
+  setTimeout(() => 
+  setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising' }), 1); 
   if (jumping) {
-    if (getTime() - lastCactusTime > 0.05) {
+    if (e.time - lastCactusTime > 0.05) {
       score++;
       displayScore();
-      lastCactusTime = getTime();
+      lastCactusTime = e.time;
     }
   } else if (playing) {
     sound.playSound(SOUND_GAMEOVER, 30);
@@ -213,7 +215,7 @@ function onInit() {
   });
 
   // Magnetic Sensor
-  setWatch(onCactus, HALL_SENSOR_PIN, { repeat: true, edge: 'rising' });
+  setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising' });
 
   // Potentiometer
   digitalWrite(POT_VCC_PIN, 1);
