@@ -72,10 +72,6 @@ function setSpeed(speed) {
 
 function displayScore() {
   const digitWidth = 48;
-
-  if (display.isBusy()) {
-    return Promise.resolve(null);
-  }
   
   let ypos = 48;
   let num = score;
@@ -124,7 +120,7 @@ function startGame() {
   display.fillMemory(0xff);
   display.displayFrame().then(() => {
     display.fillMemory(0xff);
-    return displayScore();
+    display.registerUpdate(displayScore);
   });
   score = 0;
   playing = true;
@@ -151,13 +147,13 @@ function onCactus(e) {
   if (jumping) {
     if (e.time - lastCactusTime > 0.05) {
       score++;
-      displayScore();
+      display.registerUpdate(displayScore);
       lastCactusTime = e.time;
     }
   } else if (playing) {
     sound.playSound(SOUND_GAMEOVER, 30);
     endGame();
-    displayGameOver();
+    display.registerUpdate(displayGameOver);
   }
 }
 

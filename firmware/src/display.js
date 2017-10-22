@@ -47,6 +47,8 @@ const LUT_PARTIAL_UPDATE = [
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 ];
 
+let pendingUpdate = null;
+
 function start() {
   SPI1.setup({ mosi: DIN_PIN, sck: CLK_PIN, baud: 2000000 });
   pinMode(BUSY_PIN, 'input');
@@ -119,7 +121,13 @@ function displayFrame() {
   sendData(0xC4);
   sendCommand(MASTER_ACTIVATION);
   sendCommand(TERMINATE_FRAME_READ_WRITE);
-  return waitReady();
+  return waitReady().then(() => {
+    if (pendingUpdate) {
+      const updateCallback = pendingUpdate;
+      pendingUpdate = null;
+      return updateCallback();
+    }
+  });
 }
 
 function setMemoryArea(x, y, xEnd, yEnd) {
@@ -188,6 +196,14 @@ function writeChar(buf, w, h, offs, x) {
   sendData(buf);
 }
 
+function registerUpdate(updateCallback) {
+  if (isBusy()) {
+    pendingUpdate = updateCallback;
+  } else {
+    updateCallback();
+  }
+}
+
 module.exports = {
   start: start,
   initModule: initModule,
@@ -200,4 +216,5 @@ module.exports = {
   clsw: clsw,
   writeChar: writeChar,
   displayFrame: displayFrame,
+  registerUpdate: registerUpdate,
 };
