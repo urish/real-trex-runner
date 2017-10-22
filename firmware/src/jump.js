@@ -8,14 +8,14 @@ DOWN = 0;
 function jump() {
   digitalWrite(JUMP_DIR, UP);
   digitalWrite(JUMP_ENA, 1);
-  JUMP_STEP.stepper(8000, 4000);
-  setTimeout(() => digitalWrite(JUMP_ENA, 0), 500);
+  JUMP_STEP.stepper(8000, 4100);
+  setTimeout(() => digitalWrite(JUMP_ENA, 0), 550);
 }
 
 function goDown() {
   digitalWrite(JUMP_DIR, DOWN);
   digitalWrite(JUMP_ENA, 1);
-  JUMP_STEP.stepper(8000, 3800);
+  JUMP_STEP.stepper(10000, 3900);
   setTimeout(() => digitalWrite(JUMP_ENA, 0), 500);
 }
 
