@@ -227,9 +227,12 @@ function onInit() {
   digitalWrite(POT_VCC_PIN, 1);
   digitalWrite(POT_GND_PIN, 0);
   pinMode(POT_PIN, 'analog');
-  /*  setInterval(() => {
-      setSpeed(MIN_SPEED + (MAX_SPEED - MIN_SPEED) * analogRead(D4));
-    }, 100);*/
+  setInterval(() => {
+    const newSpeed = MIN_SPEED + (MAX_SPEED - MIN_SPEED) * analogRead(POT_PIN);
+    if (Math.abs(newSpeed - currentSpeed) > 100) {
+      setSpeed(newSpeed);
+    }
+  }, 100);
 }
 
 global.onInit = onInit;
