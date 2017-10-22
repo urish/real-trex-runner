@@ -156,7 +156,7 @@ function onCactus(e) {
     if (e.time - lastCactusTime > 0.1) {
       score++;
       if (score % 10 === 0) {
-        playSound(SOUND_LEVELUP);
+        sound.playSound(SOUND_LEVELUP);
       }
       highscore.update(score);
       display.registerUpdate(displayScore);
