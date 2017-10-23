@@ -11,7 +11,7 @@ function connectButton() {
       digitalWrite(INDICATION_PIN, 0);
       // TODO implement reconnect
       char.on('characteristicvaluechanged', e => {
-        const state = e.target.value.buffer[0];
+        const state = e.target.value && e.target.value.buffer[0];
         if (state === 1 && onClick) {
           onClick();
         }
