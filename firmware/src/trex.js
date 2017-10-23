@@ -176,8 +176,8 @@ function onCactus(e) {
       lastCactusTime = e.time;
     }
   } else if (playing) {
-    sound.playSound(SOUND_GAMEOVER, 30);
     endGame();
+    sound.playSound(SOUND_GAMEOVER, 30);
     display.registerUpdate(displayGameOver);
     gameOverTimer = setTimeout(() => {
       display.registerUpdate(displayGameLogo);
