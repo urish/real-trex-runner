@@ -34,6 +34,7 @@ const sound = require('./sound');
 let playing = false;
 let startTime = null;
 let jumping = false;
+let gameOverTimer = null;
 let score = 0;
 let high = 0;
 
@@ -91,8 +92,16 @@ function renderHighScore() {
 
 function displayGameOver() {
   display.fillMemory(0xff);
-  displayString('GAME', 24, 240, 24, 21, 9);
-  displayString('OVER', 56, 240, 24, 21, 9);
+  displayString(score.toString(), 24, 220, 48, 38, 10);
+  displayString('GAME', 88, 252, 24, 21, 9);
+  displayString('OVER', 88, 116, 24, 21, 9);
+  return display.displayFrame();
+}
+
+function displayGameLogo() {
+  display.fillMemory(0xff);
+  display.writeChar(assets.trex, 40, 35, 100, 32);
+  display.writeChar(assets.trex, 40, 35, 40, 64);
   renderHighScore();
   return display.displayFrame();
 }
@@ -118,6 +127,10 @@ function startGame() {
     display.fillMemory(0xff);
     display.registerUpdate(displayScore);
   });
+  if (gameOverTimer) {
+    clearInterval(gameOverTimer);
+    gameOverTimer = null;
+  }
   score = 0;
   playing = true;
   jumping = false;
@@ -159,6 +172,10 @@ function onCactus(e) {
     sound.playSound(SOUND_GAMEOVER, 30);
     endGame();
     display.registerUpdate(displayGameOver);
+    gameOverTimer = setTimeout(() => {
+      display.registerUpdate(displayGameLogo);
+      gameOverTimer = null;
+    }, 3000);
   }
 }
 
@@ -209,14 +226,9 @@ function onInit() {
 
   // Display
   display.start();
-  display.initModule(display.LUT_PARTIAL_UPDATE).then(() => {
-    display.clsw().then(() => {
-      display.writeChar(assets.trex, 40, 35, 100, 32);
-      display.writeChar(assets.trex, 40, 35, 40, 64);
-      renderHighScore();
-      display.displayFrame();
-    });
-  });
+  display.initModule(display.LUT_PARTIAL_UPDATE)
+    .then(() => display.clsw())
+    .then(displayGameLogo);
 
   // Magnetic Sensor
   setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising' });
