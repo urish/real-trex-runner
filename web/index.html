@@ -22,7 +22,7 @@
       &nbsp;<img src="assets/trex.svg" height="32" /> Real-Life T-Rex Runner
   </h1>
 
-  <p>High Score: 0001</p>
+  <p>High Score: <span id="highscore">0000</span></p>
 
   <p>
     Powered by
@@ -46,6 +46,27 @@
     <a href="https://www.eel-design.com/" target="_blank">Noa Shaked</a>
   </p>
 
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDYCtxAmJ26QNwVCN9Q4MSTI3KtXFeydC0",
+      authDomain: "real-trex-game.firebaseapp.com",
+      databaseURL: "https://real-trex-game.firebaseio.com",
+      projectId: "real-trex-game",
+      storageBucket: "real-trex-game.appspot.com",
+      messagingSenderId: "803057694798"
+    };
+    firebase.initializeApp(config);
+    firebase.database().ref().child('high').on('value', function(snapshot) {
+      var score = snapshot.val().toString();
+      while (score.length < 4) {
+        score = '0' + score;
+      }
+      document.getElementById('highscore').textContent = score;
+    });
+  </script>
+  
 </body>
 
 </html>
