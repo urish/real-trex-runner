@@ -81,6 +81,7 @@ function displayString(s, x, y, charWidth, charHeight, spacing, prefix) {
 }
 
 function displayScore() {
+  display.fillMemory(0xff);
   displayString(score.toString(), 24, 220, 48, 38, 10);
   renderHighScore();
   return display.displayFrame();
@@ -129,7 +130,6 @@ function startGame() {
   }
   display.fillMemory(0xff);
   display.displayFrame().then(() => {
-    display.fillMemory(0xff);
     display.registerUpdate(displayScore);
   });
   score = 0;
@@ -158,7 +158,7 @@ function onClick() {
 let lastCactusTime = getTime();
 function onCactus(e) {
   setTimeout(() =>
-    setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising' }), 1);
+    setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising' }), 10);
   if (startTime && (e.time - startTime) < 0.1) {
     return;
   }
@@ -218,27 +218,6 @@ function onInit() {
   setWatch(onClick, BUTTON_PIN, { edge: 'falling', repeat: true, debounce: 10 });
   button.init(onClick);
   jump.init();
-
-  // Bluetooth
-  NRF.setServices({
-    0xfefe: {
-      0xfe01: {
-        writable: true,
-        maxLen: 1,
-        onWrite: evt => evt.data[0] ? startGame() : endGame(),
-      },
-      0xfe02: {
-        maxLen: 1,
-        writable: true,
-        onWrite: jump
-      },
-      0xfe03: {
-        maxLen: 2,
-        writable: true,
-        onWrite: evt => setSpeed(evt.data[0] | (evt.data[1] << 8))
-      }
-    }
-  });
 
   highscore.init();
 
