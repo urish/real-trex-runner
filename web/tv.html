@@ -1,0 +1,84 @@
+<html>
+
+<head>
+  <title>Real-Life T-Rex Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Press Start 2P', cursive;
+      text-align: center;
+      background: #f7f7f7;
+    }
+
+    h1 {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>
+      &nbsp;<img src="assets/trex.svg" height="32" /> Real-Life T-Rex Runner
+  </h1>
+
+  <br />
+  <br />
+  <br />
+
+  <p>High Score: <span id="highscore">0000</span></p>
+
+  <br />
+  <br />
+  <br />
+
+  <p>
+    The game is written in JavaScript, running on physical hardware!
+  </p>  
+  
+  <p>
+    How does it work?
+    <br />
+    <br />
+    https://urish.org/t-rex
+  </p>
+
+  <br />
+  <br />
+  <br />
+
+  <h3>
+    Credits
+  </h3>
+
+  <p>
+    <a href="https://twitter.com/UriShaked" target="_blank">Uri Shaked</a>,
+    <a href="https://twitter.com/ariellaeli" target="_blank">Ariella Eliassaf</a>,
+    <a href="https://www.eel-design.com/" target="_blank">Noa Shaked</a>
+  </p>
+
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDYCtxAmJ26QNwVCN9Q4MSTI3KtXFeydC0",
+      authDomain: "real-trex-game.firebaseapp.com",
+      databaseURL: "https://real-trex-game.firebaseio.com",
+      projectId: "real-trex-game",
+      storageBucket: "real-trex-game.appspot.com",
+      messagingSenderId: "803057694798"
+    };
+    firebase.initializeApp(config);
+    firebase.database().ref().child('high').on('value', function(snapshot) {
+      var score = snapshot.val().toString();
+      while (score.length < 4) {
+        score = '0' + score;
+      }
+      document.getElementById('highscore').textContent = score;
+    });
+    setTimeout(() => location.reload(), 60000);
+  </script>
+  
+</body>
+
+</html>
