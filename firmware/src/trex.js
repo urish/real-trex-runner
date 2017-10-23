@@ -36,7 +36,8 @@ let startTime = null;
 let jumping = false;
 let gameOverTimer = null;
 let score = 0;
-let high = 0;
+let gameIndex = 0;
+let gameDuration = 0;
 
 let currentSpeed = 0;
 function stopMotors() {
@@ -136,11 +137,14 @@ function startGame() {
   jumping = false;
   startTime = getTime();
   lastCactusTime = 0;
+  gameIndex++;
 }
 
 function endGame() {
   playing = false;
+  gameDuration = getTime() - startTime;
   stopMotors();
+  advertise();
 }
 
 function onClick() {
@@ -179,12 +183,26 @@ function onCactus(e) {
   }
 }
 
-function onInit() {
+function advertise() {
+  let advDataArray = new Uint8Array(12);
+  let advData = new DataView(advDataArray.buffer);
+  advData.setUint16(0, 0xfefe); // Service id
+  advData.setUint16(2, highscore.get());
+  advData.setUint16(4, gameIndex);
+  advData.setFloat32(6, gameDuration);
+  advData.setUint16(10, score);
+
   const eirEntry = (type, data) => [data.length + 1, type].concat(data);
   NRF.setAdvertising([].concat(
     eirEntry(0x3, [0xfe, 0xfe]),
-    eirEntry(0x9, DEVICE_NAME)
+    eirEntry(0x9, DEVICE_NAME),
+    eirEntry(0x16, Array.apply(null, advDataArray))
   ), { name: DEVICE_NAME });
+}
+
+function onInit() {
+  gameIndex = 0;
+  advertise();
 
   // Serial for DFPlayer Mini
   sound.init(DFPLAYER_PIN);
