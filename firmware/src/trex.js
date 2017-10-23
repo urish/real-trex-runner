@@ -20,7 +20,7 @@ SOUND_GAMEOVER = 3;
 
 MIN_SPEED = 2000;
 MAX_SPEED = 28000;
-DEFAULT_SPEED = 8000;
+DEFAULT_SPEED = 14000;
 
 DEVICE_NAME = 't-rex';
 
@@ -56,7 +56,10 @@ let speedTimer = null;
 function setSpeed(speed) {
   const delta = 50;
   function removeTimer() {
-    clearInterval(speedTimer);
+    try {
+      clearInterval(speedTimer);      
+    } catch (e) {
+    }
     speedTimer = null;
   }
   if (speedTimer) {
@@ -81,7 +84,6 @@ function displayString(s, x, y, charWidth, charHeight, spacing, prefix) {
 }
 
 function displayScore() {
-  display.fillMemory(0xff);
   displayString(score.toString(), 24, 220, 48, 38, 10);
   renderHighScore();
   return display.displayFrame();
@@ -130,6 +132,7 @@ function startGame() {
   }
   display.fillMemory(0xff);
   display.displayFrame().then(() => {
+    display.fillMemory(0xff);    
     display.registerUpdate(displayScore);
   });
   score = 0;
@@ -234,12 +237,12 @@ function onInit() {
   digitalWrite(POT_VCC_PIN, 1);
   digitalWrite(POT_GND_PIN, 0);
   pinMode(POT_PIN, 'analog');
-  setInterval(() => {
+  /*setInterval(() => {
     const newSpeed = MIN_SPEED + (MAX_SPEED - MIN_SPEED) * analogRead(POT_PIN);
     if (Math.abs(newSpeed - currentSpeed) > 100) {
       setSpeed(newSpeed);
     }
-  }, 100);
+  }, 100);*/
 }
 
 global.onInit = onInit;
