@@ -73,34 +73,27 @@ function setSpeed(speed) {
   }, 10);
 }
 
-function displayScore() {
-  const digitWidth = 48;
+function displayString(s, x, y, charWidth, charHeight, spacing, prefix) {
+  s.split('').forEach((c, i) =>
+    display.writeChar(assets[(prefix || '') + c], charWidth, charHeight, y - i * (charHeight + spacing), x));
+}
 
-  let ypos = 48;
-  let num = score;
-  if (num === 0) {
-    display.writeChar(assets[0], digitWidth, 19, ypos, 32);
-  }
-  while (num > 0) {
-    const digit = num % 10;
-    num = Math.floor(num / 10);
-    display.writeChar(assets[digit], digitWidth, 19, ypos, 32);
-    ypos += digitWidth;
-  }
+function displayScore() {
+  displayString(score.toString(), 24, 220, 48, 38, 10);
+  renderHighScore();
   return display.displayFrame();
 }
 
-function displayGameOver() {
-  let ypos = 240;
-  let str = 'GAME';
-  for (let i = 0; i < str.length; i++) {
-    display.writeChar(assets[str[i]], 24, 21, ypos - i * 30, 24);
-  }
+function renderHighScore() {
+  displayString('HI', 88, 240, 24, 21, 9);
+  displayString(highscore.get().toString(), 88, 150, 24, 21, 9, 's');
+}
 
-  str = 'OVER';
-  for (let i = 0; i < str.length; i++) {
-    display.writeChar(assets[str[i]], 24, 21, ypos - i * 30, 64);
-  }
+function displayGameOver() {
+  display.fillMemory(0xff);
+  displayString('GAME', 24, 240, 24, 21, 9);
+  displayString('OVER', 56, 240, 24, 21, 9);
+  renderHighScore();
   return display.displayFrame();
 }
 
@@ -219,7 +212,8 @@ function onInit() {
   display.initModule(display.LUT_PARTIAL_UPDATE).then(() => {
     display.clsw().then(() => {
       display.writeChar(assets.trex, 40, 35, 100, 32);
-      display.writeChar(assets.trex, 40, 35, 160, 64);
+      display.writeChar(assets.trex, 40, 35, 40, 64);
+      renderHighScore();
       display.displayFrame();
     });
   });
