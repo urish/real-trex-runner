@@ -123,15 +123,15 @@ function doJump() {
 
 function startGame() {
   startMotors();
+  if (gameOverTimer) {
+    clearInterval(gameOverTimer);
+    gameOverTimer = null;
+  }
   display.fillMemory(0xff);
   display.displayFrame().then(() => {
     display.fillMemory(0xff);
     display.registerUpdate(displayScore);
   });
-  if (gameOverTimer) {
-    clearInterval(gameOverTimer);
-    gameOverTimer = null;
-  }
   score = 0;
   playing = true;
   jumping = false;
