@@ -1,6 +1,6 @@
-# TRex Runner
+# In-Real-Life TRex Runner
 
-[TRex Runner](https://www.quora.com/What-is-the-story-behind-Chromes-unable-to-connect-to-the-internet-T-Rex-image) assets as a [Printed Circut Board](https://medium.com/@urish/a-practical-guide-to-designing-pcb-art-b5aa22926a5c)
+[Read the blog post](https://medium.com/@urish/i-saw-a-dinosaur-or-how-i-built-a-real-life-version-of-chrome-t-rex-game-92175f6cad2c)
 
 ## License
 
