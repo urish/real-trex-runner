@@ -78,6 +78,20 @@ function setSpeed(speed) {
   }, 10);
 }
 
+let sensorWatcher = null;
+function startSensor() {
+  if (sensorWatcher == null) {
+    sensorWatcher = setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising', repeat: true });
+  }
+}
+
+function stopSensor() {
+  if (sensorWatcher != null) {
+    clearWatch(sensorWatcher);
+    sensorWatcher = null;
+  }
+}
+
 function displayString(s, x, y, charWidth, charHeight, spacing, prefix) {
   s.split('').forEach((c, i) =>
     display.writeChar(assets[(prefix || '') + c], charWidth, charHeight, y - i * (charHeight + spacing), x));
@@ -134,6 +148,7 @@ function startGame() {
   display.displayFrame().then(() => {
     display.fillMemory(0xff);    
     display.registerUpdate(displayScore);
+    startSensor();
   });
   score = 0;
   playing = true;
@@ -146,6 +161,7 @@ function startGame() {
 function endGame() {
   playing = false;
   gameDuration = getTime() - startTime;
+  stopSensor();
   stopMotors();
   advertise();
 }
@@ -160,8 +176,6 @@ function onClick() {
 
 let lastCactusTime = getTime();
 function onCactus(e) {
-  setTimeout(() =>
-    setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising' }), 10);
   if (startTime && (e.time - startTime) < 0.1) {
     return;
   }
@@ -229,9 +243,6 @@ function onInit() {
   display.initModule(display.LUT_PARTIAL_UPDATE)
     .then(() => display.clsw())
     .then(displayGameLogo);
-
-  // Magnetic Sensor
-  setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising' });
 
   // Potentiometer
   digitalWrite(POT_VCC_PIN, 1);
