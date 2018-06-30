@@ -112,7 +112,7 @@ function waitReady() {
     if (!isBusy()) {
       resolve();
     };
-    setWatch(resolve, BUSY_PIN);
+    setWatch(resolve, BUSY_PIN, { debounce: 0, edge: 'falling'});
   });
 }
 
