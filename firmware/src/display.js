@@ -205,16 +205,16 @@ function registerUpdate(updateCallback) {
 }
 
 module.exports = {
-  start: start,
-  initModule: initModule,
-  LUT_PARTIAL_UPDATE: LUT_PARTIAL_UPDATE,
+  start,
+  initModule,
+  LUT_PARTIAL_UPDATE,
   WIDTH: EPD_WIDTH,
   HEIGHT: EPD_HEIGHT,
-  isBusy: isBusy,
+  isBusy,
   fillMemory,
-  cls: cls,
-  clsw: clsw,
-  writeChar: writeChar,
-  displayFrame: displayFrame,
-  registerUpdate: registerUpdate,
+  cls,
+  clsw,
+  writeChar,
+  displayFrame,
+  registerUpdate,
 };

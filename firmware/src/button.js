@@ -26,5 +26,5 @@ function init(clickHandler) {
 }
 
 module.exports = {
-  init: init
+  init
 };

@@ -26,7 +26,7 @@ function init() {
 }
 
 module.exports = {
-  jump: jump,
-  goDown: goDown,
-  init: init
+  jump,
+  goDown,
+  init
 };
