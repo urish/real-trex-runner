@@ -26,6 +26,7 @@ DEVICE_NAME = 't-rex';
 
 const assets = require('./assets');
 const button = require('./button');
+const clock = require('./clock');
 const display = require('./display');
 const highscore = require('./highscore');
 const jump = require('./jump');
@@ -121,7 +122,13 @@ function displayGameLogo() {
   display.writeChar(assets.trex, 40, 35, 100, 32);
   display.writeChar(assets.trex, 40, 35, 40, 64);
   renderHighScore();
-  return display.displayFrame();
+  return display.displayFrame().then(() => {
+    setTimeout(() => {
+      if (!playing) {
+        clock.start();
+      }
+    }, 4000);
+  });
 }
 
 function doJump() {
@@ -139,6 +146,7 @@ function doJump() {
 }
 
 function startGame() {
+  clock.stop();
   startMotors();
   if (gameOverTimer) {
     clearInterval(gameOverTimer);
@@ -164,6 +172,7 @@ function endGame() {
   stopSensor();
   stopMotors();
   advertise();
+  clock.start();
 }
 
 function onClick() {
