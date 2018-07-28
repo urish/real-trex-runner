@@ -153,11 +153,11 @@ function startGame() {
     clearInterval(gameOverTimer);
     gameOverTimer = null;
   }
-  display.fillMemory(0xff);
-  display.displayFrame().then(() => {
-    display.fillMemory(0xff);    
-    display.registerUpdate(displayScore);
-    startSensor();
+  display.registerUpdate(() => {
+    display.clsw().then(() => {
+      display.registerUpdate(displayScore);
+      startSensor();
+    });  
   });
   score = 0;
   playing = true;
