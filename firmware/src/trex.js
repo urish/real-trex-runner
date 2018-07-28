@@ -147,6 +147,7 @@ function doJump() {
 
 function startGame() {
   clock.stop();
+  jump.goDown()
   startMotors();
   if (gameOverTimer) {
     clearInterval(gameOverTimer);
@@ -203,6 +204,7 @@ function onCactus(e) {
     sound.playSound(SOUND_GAMEOVER, 30);
     display.registerUpdate(displayGameOver);
     gameOverTimer = setTimeout(() => {
+      jump.jump();
       display.registerUpdate(displayGameLogo);
       gameOverTimer = null;
     }, 3000);
