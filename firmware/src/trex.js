@@ -13,6 +13,8 @@ POT_GND_PIN = D5;
 BUTTON_PIN = D11;
 HALL_SENSOR_PIN = D23;
 DFPLAYER_PIN = D30;
+I2C_SCL = D24;
+I2C_SDA = D25;
 
 SOUND_JUMP = 1;
 SOUND_LEVELUP = 2;
@@ -30,6 +32,7 @@ const clock = require('./clock');
 const display = require('./display');
 const highscore = require('./highscore');
 const jump = require('./jump');
+const rtcDate = require('./rtcDate');
 const sound = require('./sound');
 
 let playing = false;
@@ -231,6 +234,14 @@ function advertise() {
 function onInit() {
   gameIndex = 0;
   advertise();
+
+  // Read current time from RTC
+  try {
+    I2C1.setup({ scl: D24, sda: D25 });
+    rtcDate.updateSystemClock(I2C1);
+  } catch (e) {
+    // We may get here if no RTC module is connected; continue anyway
+  }
 
   // Serial for DFPlayer Mini
   sound.init(DFPLAYER_PIN);
