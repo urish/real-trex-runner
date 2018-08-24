@@ -7,7 +7,7 @@ export default {
     file: 'dist/firmware.js',
     format: 'cjs',
   },
-  external: ['Flash'],
+  external: ['Flash', 'NRF52LL'],
   intro: 'const module={}',
   plugins: [
     commonjs(),
