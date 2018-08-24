@@ -1,7 +1,7 @@
 const AccurateStepper = require('./stepper');
 
 JUMP_DIR = D8;
-JUMP_ENA = D12;
+JUMP_ENA = D11;
 JUMP_STEP = D13;
 
 UP = 1;
