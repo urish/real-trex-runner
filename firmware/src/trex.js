@@ -22,7 +22,7 @@ SOUND_GAMEOVER = 3;
 
 MIN_SPEED = 2000;
 MAX_SPEED = 28000;
-DEFAULT_SPEED = 14000;
+DEFAULT_SPEED = 8000;
 
 DEVICE_NAME = 't-rex';
 
@@ -232,6 +232,7 @@ function advertise() {
 }
 
 function onInit() {
+  E.setTimeZone(3);
   gameIndex = 0;
   advertise();
 
