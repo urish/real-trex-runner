@@ -1,6 +1,6 @@
 # Espruino build for Chrome T-Rex Game In-RealLife
 
-Download [latest patched Espruino firmware build](espruino_1v99.169.zip)
+Download [latest patched Espruino firmware build](espruino_2v04.11.zip)
 
 ## Build instructions
 
