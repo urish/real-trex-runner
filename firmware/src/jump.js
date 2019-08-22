@@ -4,8 +4,8 @@ JUMP_DIR = D8;
 JUMP_ENA = D11;
 JUMP_STEP = D13;
 
-UP = 1;
-DOWN = 0;
+UP = 0;
+DOWN = 1;
 
 const stepper = new AccurateStepper(JUMP_STEP);
 
@@ -17,10 +17,15 @@ function jump() {
 }
 
 function goDown() {
-  digitalWrite(JUMP_DIR, DOWN);
-  digitalWrite(JUMP_ENA, 1);
-  stepper.start(10000, 3900);
-  setTimeout(() => digitalWrite(JUMP_ENA, 0), 500);
+  return new Promise(resolve => {
+    digitalWrite(JUMP_DIR, DOWN);
+    digitalWrite(JUMP_ENA, 1);
+    stepper.start(10000, 3900);
+    setTimeout(() => {
+      digitalWrite(JUMP_ENA, 0);
+      resolve();
+    }, 500);
+  });
 }
 
 function init() {

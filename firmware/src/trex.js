@@ -38,6 +38,8 @@ const sound = require('./sound');
 let playing = false;
 let startTime = null;
 let jumping = false;
+let goingDown = false;
+let pendingJump = false;
 let gameOverTimer = null;
 let score = 0;
 let gameIndex = 0;
@@ -136,15 +138,24 @@ function displayGameLogo() {
 
 function doJump() {
   if (jumping) {
-    // TODO support long jump?
+    if (goingDown) {
+      pendingJump = true;
+    }
     return;
   }
   sound.playSound(SOUND_JUMP, 30);
   jumping = true;
   jump.jump();
   setTimeout(() => {
-    jump.goDown()
-    jumping = false;
+    goingDown = true;
+    jump.goDown().then(() => {
+      jumping = false;
+      goingDown = false;
+      if (pendingJump) {
+        setTimeout(doJump, 10);
+        pendingJump = false;
+      }
+    });
   }, 1500);
 }
 
@@ -165,6 +176,8 @@ function startGame() {
   score = 0;
   playing = true;
   jumping = false;
+  goingDown = false;
+  pendingJump = false;
   startTime = getTime();
   lastCactusTime = 0;
   gameIndex++;
