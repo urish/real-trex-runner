@@ -1,4 +1,12 @@
 // RTC: DS3231
+//
+// To set the date:
+// I2C1.setup({ scl: D24, sda: D25 });
+// const rtc = require("DS3231").connect(I2C1);
+// rtc.setDate(date,month,year);
+// rtc.setTime(hours,minutes);
+// console.log(rtc.readDateTime());
+
 const I2C_ADDR = 0x68;
 
 function getRtcDate(i2c) {
