@@ -51,7 +51,7 @@ function expand(n) {
 }
 
 function encode(bitmap) {
-  return new Buffer(new Uint8Array(bitmap)).toString('base64').replace(/=+$/, '');
+  return Buffer.from(new Uint8Array(bitmap)).toString('base64').replace(/=+$/, '');
 }
 
 function decode(val) {
