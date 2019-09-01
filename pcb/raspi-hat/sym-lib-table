@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name dfplayer)(type Legacy)(uri ${KIPRJMOD}/dfplayer.lib)(options "")(descr ""))
+  (lib (name uhat)(type Legacy)(uri ${KIPRJMOD}/uhat.lib)(options "")(descr ""))
+)

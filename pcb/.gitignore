@@ -1,0 +1,9 @@
+gerber 
+*.kicad_pcb-bak
+*.sch-bak
+*-rescue.lib
+*-rescue.dcm
+*.net
+*.dsn
+*.ses
+fp-info-cache

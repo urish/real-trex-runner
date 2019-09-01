@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP Pololu_Breakout_DRV8880
+D Pololu Breakout Board, Stepper Driver DRV8825
+K Pololu Breakout Board Stepper Driver DRV8825
+F https://www.pololu.com/product/2982
+$ENDCMP
+#
+#End Doc Library
