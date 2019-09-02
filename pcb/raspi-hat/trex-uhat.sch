@@ -564,7 +564,7 @@ $EndComp
 Wire Wire Line
 	7300 3300 6800 3300
 Text Label 6800 3300 0    50   ~ 0
-STP1_EN
+STP1_~SLP
 Wire Wire Line
 	7300 3400 6800 3400
 Text Label 6800 3400 0    50   ~ 0
@@ -574,21 +574,17 @@ Wire Wire Line
 Text Label 9250 3400 0    50   ~ 0
 STP1_STEP
 Wire Wire Line
-	3250 6050 2850 6050
-Wire Wire Line
-	3250 5850 2850 5850
-Text Label 2850 5850 0    50   ~ 0
-STP1_EN
-Text Label 2850 5950 0    50   ~ 0
+	3250 6050 2800 6050
+Text Label 2800 5650 0    50   ~ 0
+STP1_~SLP
+Text Label 2800 5950 0    50   ~ 0
 STP1_STEP
 Wire Wire Line
-	2850 5950 3250 5950
-Text Label 2850 6050 0    50   ~ 0
+	2800 5950 3250 5950
+Text Label 2800 6050 0    50   ~ 0
 STP1_DIR
-Wire Wire Line
-	4850 5900 5300 5900
-Text Label 4850 5900 0    50   ~ 0
-STP2_EN
+Text Label 4850 5700 0    50   ~ 0
+STP2_~SLP
 Wire Wire Line
 	5300 6000 4850 6000
 Text Label 4850 6000 0    50   ~ 0
@@ -604,7 +600,7 @@ STP2_DIR
 Wire Wire Line
 	7300 4200 6800 4200
 Text Label 6800 4200 0    50   ~ 0
-STP2_EN
+STP2_~SLP
 Wire Wire Line
 	9200 4200 9650 4200
 Text Label 9200 4200 0    50   ~ 0
@@ -655,34 +651,23 @@ NoConn ~ 1650 2700
 NoConn ~ 1650 2800
 NoConn ~ 1650 2600
 $Comp
-L Connector:AudioJack3 J7
+L Connector:AudioJack4 J7
 U 1 1 5D77E4B7
 P 1100 3550
 F 0 "J7" V 1128 3320 50  0000 R CNN
 F 1 "AudioJack3" V 1037 3320 50  0000 R CNN
-F 2 "Connector_Audio:Jack_3.5mm_CUI_SJ1-3533NG_Horizontal" H 1100 3550 50  0001 C CNN
+F 2 "Connector_Audio:Jack_3.5mm_PJ320E_Horizontal" H 1100 3550 50  0001 C CNN
 F 3 "~" H 1100 3550 50  0001 C CNN
 	1    1100 3550
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	1650 3100 1000 3100
-Wire Wire Line
-	1000 3100 1000 3350
-Wire Wire Line
-	1100 3350 1200 3350
-Wire Wire Line
-	1100 3350 1100 2900
-Wire Wire Line
-	1100 2900 1650 2900
-Connection ~ 1100 3350
 $Comp
 L Connector:Barrel_Jack_Switch J8
 U 1 1 5D798245
 P 9200 1550
 F 0 "J8" H 8970 1500 50  0000 R CNN
 F 1 "Jack-DC" H 8970 1591 50  0000 R CNN
-F 2 "Connector_BarrelJack:BarrelJack_CUI_PJ-063AH_Horizontal" H 9250 1510 50  0001 C CNN
+F 2 "Connector_BarrelJack:BarrelJack_CUI_PJ-102AH_Horizontal" H 9250 1510 50  0001 C CNN
 F 3 "~" H 9250 1510 50  0001 C CNN
 	1    9200 1550
 	-1   0    0    1   
@@ -775,10 +760,10 @@ NoConn ~ 3250 6250
 NoConn ~ 3250 6350
 NoConn ~ 3250 6450
 NoConn ~ 3250 6550
-NoConn ~ 3250 5650
+NoConn ~ 3250 5850
 NoConn ~ 3250 5550
 NoConn ~ 5300 5600
-NoConn ~ 5300 5700
+NoConn ~ 5300 5900
 $Comp
 L Connector:Conn_01x04_Female J10
 U 1 1 5D85E9E8
@@ -872,10 +857,10 @@ $EndComp
 Wire Wire Line
 	9450 4900 9300 4900
 $Comp
-L power:+3.3V #PWR?
+L power:+3.3V #PWR0106
 U 1 1 5D910A9E
 P 10150 5100
-F 0 "#PWR?" H 10150 4950 50  0001 C CNN
+F 0 "#PWR0106" H 10150 4950 50  0001 C CNN
 F 1 "+3.3V" H 10165 5273 50  0000 C CNN
 F 2 "" H 10150 5100 50  0001 C CNN
 F 3 "" H 10150 5100 50  0001 C CNN
@@ -884,4 +869,29 @@ F 3 "" H 10150 5100 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	10150 4900 10150 5100
+Wire Wire Line
+	1000 2900 1000 3250
+Wire Wire Line
+	1000 2900 1650 2900
+Wire Wire Line
+	1650 3100 1300 3100
+Wire Wire Line
+	1200 3100 1200 3350
+Wire Wire Line
+	1300 3350 1300 3100
+Connection ~ 1300 3100
+Wire Wire Line
+	1300 3100 1200 3100
+Wire Wire Line
+	1000 3250 1100 3250
+Wire Wire Line
+	1100 3250 1100 3350
+Connection ~ 1000 3250
+Wire Wire Line
+	1000 3250 1000 3350
+Wire Wire Line
+	3250 5650 2800 5650
+Wire Wire Line
+	5300 5700 4850 5700
+NoConn ~ 9750 5200
 $EndSCHEMATC
