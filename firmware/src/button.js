@@ -1,43 +1,71 @@
-const INDICATION_PIN = D7;
-let onClick = null;
-let connected = false;
+const noble = require('@abandonware/noble');
 
-function onDisconnect() {
-  connected = false;
-  digitalWrite(INDICATION_PIN, 1);
-}
+const buttonService = 'feff';
+const buttonCharacteristic = 'fe01';
+const ledCharacteristic = 'fe02';
+const buttonName = 't-rex-btn';
 
-function connectButton() {
-  if (connected) {
-    return;
+noble.on('stateChange', (state) => {
+  if (state === 'poweredOn') {
+    console.log('Scanning...');
+    noble.startScanning([buttonService]);
+  } else {
+    noble.stopScanning();
   }
+});
 
-  connected = true;
-  NRF.requestDevice({ filters: [{ name: 't-rex-btn' }] })
-    .then(device => {
-      device.on('gattserverdisconnected', onDisconnect);
-      return device.gatt.connect();
-    })
-    .then(gatt => gatt.getPrimaryService('feff'))
-    .then(service => service.getCharacteristic('fe01'))
-    .then(char => {
-      char.startNotifications();
-      digitalWrite(INDICATION_PIN, 0);
-      char.on('characteristicvaluechanged', e => {
-        const state = e.target.value && e.target.value.buffer[0];
-        if (state === 1 && onClick) {
-          onClick();
+noble.on('discover', (peripheral) => {
+  if (peripheral.advertisement.localName === buttonName) {
+    peripheral.connect(error => {
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      console.log('Connected to', peripheral.id);
+
+      peripheral.discoverSomeServicesAndCharacteristics(
+        [buttonService],
+        [buttonCharacteristic, ledCharacteristic],
+        onServicesAndCharacteristicsDiscovered
+      );
+    });
+
+    function onServicesAndCharacteristicsDiscovered(error, services, [buttonNotifications, ledState]) {
+      if (error) {
+        console.error(error);
+        peripheral.disconnect();
+        return;
+      }
+
+      ledState.write(Buffer.from([1]));
+      setTimeout(() => {
+        ledState.write(Buffer.from([0]));
+      }, 500);
+
+      // data callback receives notifications
+      buttonNotifications.on('data', (buf) => {
+        const pressed = buf[0] === 1;
+        console.log(pressed);
+      });
+
+      // subscribe to be notified whenever the peripheral update the characteristic
+      buttonNotifications.subscribe(error => {
+        if (error) {
+          console.error('Error subscribing to echoCharacteristic');
+          peripheral.disconnect();
+        } else {
+          console.log('Subscribed for echoCharacteristic notifications');
         }
       });
-    })
-    .catch(onDisconnect);
-}
+    }
 
-function init(clickHandler) {
-  onClick = clickHandler;
-  digitalWrite(INDICATION_PIN, 1);
-  setInterval(connectButton, 1000);
-}
+    peripheral.on('disconnect', () => {
+      console.log('disconnected');
+      noble.startScanning([buttonService]);
+    });
+  }
+});
 
 module.exports = {
   init

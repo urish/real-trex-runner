@@ -4,16 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
-    "build:assets": "node build-assets",
     "test": "jest",
     "test:watch": "jest -w"
   },
   "devDependencies": {
-    "jest": "^21.2.1",
-    "rollup": "^1.20.0",
-    "rollup-plugin-commonjs": "^10.0.2",
-    "rollup-plugin-terser": "^5.1.1"
+    "jest": "^21.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@abandonware/noble": "^1.9.2-5",
+    "serialport": "^7.1.5"
+  }
 }

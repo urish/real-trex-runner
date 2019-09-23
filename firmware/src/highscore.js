@@ -1,10 +1,10 @@
-const Storage = require("Storage");
-const filename = "high.txt";
+const fs = require('fs');
+const filename = 'high.txt';
 
 let value;
 
 function init() {
-  const data = Storage.read(filename);
+  const data = fs.readFileSync(filename);
   value = data ? parseInt(data) : 0;
 }
 
@@ -14,7 +14,7 @@ function get() {
 
 function set(newValue) {
   value = newValue;
-  Storage.write(filename, value.toString());
+  fs.writeFileSync(filename, value.toString());
 }
 
 function update(score) {

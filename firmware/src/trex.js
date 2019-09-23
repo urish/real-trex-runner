@@ -1,7 +1,7 @@
 /**
  * Real Life Lonely T-Rex Game Firmware
  * 
- * Copyright (C) 2017, Uri Shaked
+ * Copyright (C) 2017, 2018, 2019 Uri Shaked
  */
 
 MOTOR_DIR = D0;

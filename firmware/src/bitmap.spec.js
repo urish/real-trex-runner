@@ -1,8 +1,10 @@
 const fs = require('fs');
+const path = require('path');
 const bitmap = require('./bitmap');
 
-const zero = fs.readFileSync('./util/fixtures/zero.txt').toString().replace(/\r/g, '');
-const zeroDouble = fs.readFileSync('./util/fixtures/zero-double.txt').toString().replace(/\r/g, '');
+const fixtures = path.join(__dirname, '../fixtures');
+const zero = fs.readFileSync(path.join(fixtures, 'zero.txt')).toString().replace(/\r/g, '');
+const zeroDouble = fs.readFileSync(path.join(fixtures, 'zero-double.txt')).toString().replace(/\r/g, '');
 
 const zeroBitmap = [
   255, 0, 127,    255, 0, 127,    248, 0, 15,     248, 0, 15,

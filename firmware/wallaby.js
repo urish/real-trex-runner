@@ -4,14 +4,12 @@ module.exports = function () {
     files: [
       'src/**/*.js',
       '!src/**/*.spec.js',
-      'util/**/*.js',
-      'util/**/fixtures/*.txt',
-      '!util/**/*.spec.js',
+      'assets/**/*.txt',
+      'fixtures/*.txt'
     ],
 
     tests: [
-      'src/**/*.spec.js',
-      'util/**/*.spec.js',
+      'src/**/*.spec.js'
     ],
 
     env: {
