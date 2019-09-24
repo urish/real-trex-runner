@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@abandonware/noble": "^1.9.2-5",
-    "serialport": "^7.1.5"
+    "onoff": "^5.0.0",
+    "serialport": "^7.1.5",
+    "spi-device": "^3.0.0"
   }
 }

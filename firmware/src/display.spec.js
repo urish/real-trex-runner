@@ -1,47 +1,55 @@
+const spiInstance = {
+  transferSync: jest.fn(),
+};
+
+jest.doMock('spi-device', () => ({
+  openSync: () => spiInstance
+}), { virtual: true });
+jest.mock('onoff', () => ({
+  Gpio: jest.fn(() => ({
+    writeSync: jest.fn(),
+    readSync: jest.fn(),
+  })),
+}), { virtual: true });
+
 describe('display module', () => {
-  let mocks;
-
-  const zero = new Uint8Array([255, 0, 127, 255, 0, 127, 248, 0, 15, 248, 0, 15, 248, 0, 15, 199, 255, 129, 199, 255, 129, 199, 255, 129, 199, 255, 241, 199, 255, 241, 192, 255, 241, 192, 255, 241, 192, 0, 1, 248, 0, 15, 248, 0, 15, 255, 0, 127, 255, 0, 127, 255, 0, 127, 255, 255, 255]);
-
-  beforeEach(() => {
-    mocks = {
-      pinMode: jest.fn(),
-      digitalWrite: jest.fn(),
-      LOW: 0,
-      HIGH: 1,
-      SPI1: {
-        setup: jest.fn(),
-        send: jest.fn()
-      }
-    };
-
-    Object.assign(global, mocks);
-  });
+  const zero = Buffer.from([255, 0, 127, 255, 0, 127, 248, 0, 15, 248, 0, 15, 248, 0, 15, 199, 255, 129, 199, 255, 129, 199, 255, 129, 199, 255, 241, 199, 255, 241, 192, 255, 241, 192, 255, 241, 192, 0, 1, 248, 0, 15, 248, 0, 15, 255, 0, 127, 255, 0, 127, 255, 0, 127, 255, 255, 255]);
 
   describe('writeChar', () => {
     it('should display the given buffer to the screen', () => {
       const display = require('./display');
-      const { writeChar } = display;
-      writeChar(zero, 24, 19, 0, 0)
-      expect(mocks.SPI1.send).toHaveBeenCalledWith(
-        new Uint8Array([255, 0, 127, 255, 0, 127, 248, 0, 15, 248, 0, 15, 248, 0, 15, 199, 255, 129, 199, 255, 129, 199, 255, 129, 199, 255, 241, 199, 255, 241, 192, 255, 241, 192, 255, 241, 192, 0, 1, 248, 0, 15, 248, 0, 15, 255, 0, 127, 255, 0, 127, 255, 0, 127, 255, 255, 255]),
-        19);
+      const { start, writeChar } = display;
+      start();
+      writeChar(zero, 24, 19, 0, 0);
+      expect(spiInstance.transferSync).toHaveBeenCalledWith([{
+        sendBuffer: Buffer.from([255, 0, 127, 255, 0, 127, 248, 0, 15, 248, 0, 15, 248, 0, 15, 199, 255, 129, 199, 255, 129, 199, 255, 129, 199, 255, 241, 199, 255, 241, 192, 255, 241, 192, 255, 241, 192, 0, 1, 248, 0, 15, 248, 0, 15, 255, 0, 127, 255, 0, 127, 255, 0, 127, 255, 255, 255]),
+        byteLength: 57,
+      }]);
     });
 
     it('should split the buffer into two parts if it spans multiple regions', () => {
       const display = require('./display');
-      const { writeChar, digits } = display;
+      const { start, writeChar } = display;
+      start();
       writeChar(zero, 24, 19, 100, 0);
 
-      expect(mocks.SPI1.send).toHaveBeenCalledWith(6, 19);
-      expect(mocks.SPI1.send).toHaveBeenCalledWith(
-        new Uint8Array([255, 0, 127, 255, 0, 127, 248, 0, 15, 248, 0, 15, 248, 0, 15, 199, 255, 129]),
-        19);
+      expect(spiInstance.transferSync).toHaveBeenCalledWith([{
+        sendBuffer: Buffer.from([6]),
+        byteLength: 1,
+      }]);
+      expect(spiInstance.transferSync).toHaveBeenCalledWith([{
+        sendBuffer: Buffer.from([255, 0, 127, 255, 0, 127, 248, 0, 15, 248, 0, 15, 248, 0, 15, 199, 255, 129]),
+        byteLength: 18,
+      }]);
 
-      expect(mocks.SPI1.send).toHaveBeenCalledWith(13, 19);
-      expect(mocks.SPI1.send).toHaveBeenCalledWith(
-        new Uint8Array([199, 255, 129, 199, 255, 129, 199, 255, 241, 199, 255, 241, 192, 255, 241, 192, 255, 241, 192, 0, 1, 248, 0, 15, 248, 0, 15, 255, 0, 127, 255, 0, 127, 255, 0, 127, 255, 255, 255]),
-        19);
+      expect(spiInstance.transferSync).toHaveBeenCalledWith([{
+        sendBuffer: Buffer.from([13]),
+        byteLength: 1,
+      }]);
+      expect(spiInstance.transferSync).toHaveBeenCalledWith([{
+        sendBuffer: Buffer.from([199, 255, 129, 199, 255, 129, 199, 255, 241, 199, 255, 241, 192, 255, 241, 192, 255, 241, 192, 0, 1, 248, 0, 15, 248, 0, 15, 255, 0, 127, 255, 0, 127, 255, 0, 127, 255, 255, 255]),
+        byteLength: 39,
+      }]);
     });
   });
 });

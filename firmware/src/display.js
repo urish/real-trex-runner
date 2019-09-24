@@ -1,13 +1,13 @@
-// Copyright (C) 2017, Uri Shaked
+// Copyright (C) 2017, 2018, 2019 Uri Shaked
 // Loosely based on code samples provided by waveshare
 // License: MIT
 
-const DIN_PIN = 22;
-const CLK_PIN = 20;
-const CS_PIN = 19;
-const DC_PIN = 18;
-const RST_PIN = 17;
-const BUSY_PIN = 16;
+const spiDevice = require('spi-device');
+const { Gpio } = require('onoff');
+
+const pinReset = new Gpio(17, 'out');
+const pinBusy = new Gpio(24, 'in', 'falling');
+const pinDC = new Gpio(25, 'out');
 
 const EPD_WIDTH = 128;
 const EPD_HEIGHT = 296;
@@ -48,27 +48,36 @@ const LUT_PARTIAL_UPDATE = [
 ];
 
 let pendingUpdate = null;
+let spi = null;
 
 function start() {
-  SPI1.setup({ mosi: DIN_PIN, sck: CLK_PIN, baud: 2000000 });
-  pinMode(BUSY_PIN, 'input');
+  spi = spiDevice.openSync(0, 0);
 }
 
 function sendCommand(cmd) {
-  digitalWrite(DC_PIN, LOW);
-  SPI1.send(cmd, CS_PIN);
+  pinDC.writeSync(0);
+  const message = [{
+    sendBuffer: Buffer.from([cmd]),
+    byteLength: 1,
+  }];
+  spi.transferSync(message);
 }
 
 function sendData(data) {
-  digitalWrite(DC_PIN, HIGH);
-  SPI1.send(data, CS_PIN);
+  pinDC.writeSync(1);
+  const buf = typeof data === 'number' ? Buffer.from([data]) : Buffer.from(data);
+  const message = [{
+    sendBuffer: buf,
+    byteLength: buf.length,
+  }];
+  spi.transferSync(message);
 }
 
 function resetModule() {
   return new Promise(resolve => {
-    digitalWrite(RST_PIN, LOW);
+    pinReset.writeSync(0);
     setTimeout(() => {
-      digitalWrite(RST_PIN, HIGH);
+      pinReset.writeSync(1);
       setTimeout(resolve, 200);
     }, 200);
   });
@@ -104,16 +113,17 @@ function initModule(lut) {
 }
 
 function isBusy() {
-  return digitalRead(BUSY_PIN);
+  return pinBusy.readSync();
 }
 
 function waitReady() {
+  let callback = null;
   return new Promise(resolve => {
+    callback = pinBusy.watch(resolve);
     if (!isBusy()) {
       resolve();
     };
-    setWatch(resolve, BUSY_PIN, { debounce: 0, edge: 'falling'});
-  });
+  }).then(() => pinBusy.unwatch(callback));
 }
 
 function displayFrame() {
@@ -157,7 +167,7 @@ function fillMemory(value) {
   let buf = new Uint8Array(EPD_WIDTH / 8 * EPD_HEIGHT / 32);
   buf.fill(value, 0, buf.length);
   for (let i = 0; i < 32; i++) {
-    sendData(buf);    
+    sendData(buf);
   }
 }
 
@@ -179,7 +189,7 @@ function clsw() {
     })
     .then(() => {
       fillMemory(0xff);
-      return displayFrame();    
+      return displayFrame();
     });
 }
 
@@ -207,6 +217,7 @@ function registerUpdate(updateCallback) {
 module.exports = {
   start,
   initModule,
+  LUT_FULL_UPDATE,
   LUT_PARTIAL_UPDATE,
   WIDTH: EPD_WIDTH,
   HEIGHT: EPD_HEIGHT,

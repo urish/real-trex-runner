@@ -5,7 +5,7 @@ const { toBitmap } = require('./bitmap');
 function loadAsset(name) {
   const assetFile = path.join(__dirname, '../assets', name + '.txt')
   const bitmapData = fs.readFileSync(assetFile).toString();
-  return toBitmap(bitmapData);
+  return new Uint8Array(toBitmap(bitmapData).bitmap);
 }
 
 module.exports = {
