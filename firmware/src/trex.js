@@ -7,24 +7,14 @@
 MOTOR_DIR = D0;
 MOTOR_STEP = D1;
 MOTOR_ENA = D2;
-POT_VCC_PIN = D3;
-POT_PIN = D4;
-POT_GND_PIN = D5;
-BUTTON_PIN = D11;
 HALL_SENSOR_PIN = D23;
 DFPLAYER_PIN = D30;
-I2C_SCL = D24;
-I2C_SDA = D25;
 
 SOUND_JUMP = 1;
 SOUND_LEVELUP = 2;
 SOUND_GAMEOVER = 3;
 
-MIN_SPEED = 2000;
-MAX_SPEED = 28000;
 DEFAULT_SPEED = 8000;
-
-DEVICE_NAME = 't-rex';
 
 const assets = require('./assets');
 const button = require('./button');
@@ -188,7 +178,6 @@ function endGame() {
   gameDuration = getTime() - startTime;
   stopSensor();
   stopMotors();
-  advertise();
   clock.start();
 }
 
@@ -227,27 +216,9 @@ function onCactus(e) {
   }
 }
 
-function advertise() {
-  let advDataArray = new Uint8Array(12);
-  let advData = new DataView(advDataArray.buffer);
-  advData.setUint16(0, 0xfefe); // Service id
-  advData.setUint16(2, highscore.get());
-  advData.setUint16(4, gameIndex);
-  advData.setFloat32(6, gameDuration);
-  advData.setUint16(10, score);
-
-  const eirEntry = (type, data) => [data.length + 1, type].concat(data);
-  NRF.setAdvertising([].concat(
-    eirEntry(0x3, [0xfe, 0xfe]),
-    eirEntry(0x9, DEVICE_NAME),
-    eirEntry(0x16, Array.apply(null, advDataArray))
-  ), { name: DEVICE_NAME });
-}
-
 function onInit() {
   E.setTimeZone(3);
   gameIndex = 0;
-  advertise();
 
   // Read current time from RTC
   try {
@@ -267,8 +238,6 @@ function onInit() {
   digitalWrite(MOTOR_DIR, 1);
 
   // Button
-  pinMode(BUTTON_PIN, 'input_pullup');
-  setWatch(onClick, BUTTON_PIN, { edge: 'falling', repeat: true, debounce: 10 });
   button.init(onClick);
   jump.init();
 
@@ -279,17 +248,6 @@ function onInit() {
   display.initModule(display.LUT_PARTIAL_UPDATE)
     .then(() => display.clsw())
     .then(displayGameLogo);
-
-  // Potentiometer
-  digitalWrite(POT_VCC_PIN, 1);
-  digitalWrite(POT_GND_PIN, 0);
-  pinMode(POT_PIN, 'analog');
-  /*setInterval(() => {
-    const newSpeed = MIN_SPEED + (MAX_SPEED - MIN_SPEED) * analogRead(POT_PIN);
-    if (Math.abs(newSpeed - currentSpeed) > 100) {
-      setSpeed(newSpeed);
-    }
-  }, 100);*/
 }
 
 global.onInit = onInit;
