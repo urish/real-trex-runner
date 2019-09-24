@@ -4,17 +4,11 @@
  * Copyright (C) 2017, 2018, 2019 Uri Shaked
  */
 
-MOTOR_DIR = D0;
-MOTOR_STEP = D1;
-MOTOR_ENA = D2;
 HALL_SENSOR_PIN = D23;
-DFPLAYER_PIN = D30;
 
 SOUND_JUMP = 1;
 SOUND_LEVELUP = 2;
 SOUND_GAMEOVER = 3;
-
-DEFAULT_SPEED = 8000;
 
 const assets = require('./assets');
 const button = require('./button');
@@ -22,7 +16,7 @@ const clock = require('./clock');
 const display = require('./display');
 const highscore = require('./highscore');
 const jump = require('./jump');
-const rtcDate = require('./rtcDate');
+const motors = require('./motors');
 const sound = require('./sound');
 
 let playing = false;
@@ -34,45 +28,6 @@ let gameOverTimer = null;
 let score = 0;
 let gameIndex = 0;
 let gameDuration = 0;
-
-let currentSpeed = 0;
-function stopMotors() {
-  currentSpeed = 0;
-  digitalWrite(MOTOR_ENA, 0);
-  digitalWrite(MOTOR_STEP, 0);
-}
-
-function startMotors() {
-  currentSpeed = 2000;
-  setSpeed(DEFAULT_SPEED);
-  digitalWrite(MOTOR_ENA, 1);
-}
-
-let speedTimer = null;
-function setSpeed(speed) {
-  const delta = 50;
-  function removeTimer() {
-    try {
-      clearInterval(speedTimer);      
-    } catch (e) {
-    }
-    speedTimer = null;
-  }
-  if (speedTimer) {
-    removeTimer();
-  }
-  speedTimer = setInterval(() => {
-    if (currentSpeed > speed) {
-      currentSpeed = Math.max(speed, currentSpeed - delta);
-    } else {
-      currentSpeed = Math.min(speed, currentSpeed + delta);
-    }
-    analogWrite(MOTOR_STEP, 0.5, { freq: currentSpeed, soft: true });
-    if (currentSpeed === speed) {
-      removeTimer();
-    }
-  }, 10);
-}
 
 let sensorWatcher = null;
 function startSensor() {
@@ -152,7 +107,7 @@ function doJump() {
 function startGame() {
   clock.stop();
   jump.goDown()
-  startMotors();
+  motors.start();
   if (gameOverTimer) {
     clearInterval(gameOverTimer);
     gameOverTimer = null;
@@ -177,7 +132,7 @@ function endGame() {
   playing = false;
   gameDuration = getTime() - startTime;
   stopSensor();
-  stopMotors();
+  motors.stop();
   clock.start();
 }
 
@@ -216,26 +171,12 @@ function onCactus(e) {
   }
 }
 
-function onInit() {
-  E.setTimeZone(3);
+async function initGame() {
   gameIndex = 0;
 
-  // Read current time from RTC
-  try {
-    I2C1.setup({ scl: D24, sda: D25 });
-    rtcDate.updateSystemClock(I2C1);
-  } catch (e) {
-    // We may get here if no RTC module is connected; continue anyway
-  }
-
-  // Serial for DFPlayer Mini
-  sound.init(DFPLAYER_PIN);
+  sound.init();
+  await motors.init();
   setTimeout(() => sound.playSound(SOUND_LEVELUP, 16), 2000);
-
-  // Set up motor
-  stopMotors();
-  setSpeed(DEFAULT_SPEED);
-  digitalWrite(MOTOR_DIR, 1);
 
   // Button
   button.init(onClick);
@@ -245,9 +186,15 @@ function onInit() {
 
   // Display
   display.start();
-  display.initModule(display.LUT_PARTIAL_UPDATE)
-    .then(() => display.clsw())
-    .then(displayGameLogo);
+  await display.initModule(display.LUT_PARTIAL_UPDATE);
+  await display.clsw();
+  await displayGameLogo;
 }
 
-global.onInit = onInit;
+module.exports = {
+  initGame
+};
+
+if (typeof require !== 'undefined' && require.main === module) {
+  initGame().catch(console.error);
+}

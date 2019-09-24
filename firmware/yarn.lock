@@ -2152,6 +2152,11 @@ pify@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-3.0.0.tgz#e5a4acd2c101fdf3d9a4d07f0dbc4db49dd28176"
 
+pigpio-client@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/pigpio-client/-/pigpio-client-1.2.0.tgz#6031f30b35b7d49526032bd3bc1eb491392568e1"
+  integrity sha512-rUAQ0sIwTA1HL3swARt2wl6BlMy1OUkMcq6oU2hbzrW1ETnJp+97PQw0J/iNRpzteIBkYlaQDdn4kzLVa9FP7A==
+
 pinkie-promise@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/pinkie-promise/-/pinkie-promise-2.0.1.tgz#2135d6dfa7a358c069ac9b178776288228450ffa"
@@ -2190,6 +2195,11 @@ prelude-ls@~1.1.2:
 preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
+
+prettier@^1.18.2:
+  version "1.18.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.18.2.tgz#6823e7c5900017b4bd3acf46fe9ac4b4d7bda9ea"
+  integrity sha512-OeHeMc0JhFE9idD4ZdtNibzY0+TPHSpSSb9h8FqtP+YnoZZ1sl8Vc9b1sasjfymH3SonAF4QcA2+mzHPhMvIiw==
 
 pretty-format@^21.2.1:
   version "21.2.1"

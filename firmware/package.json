@@ -8,11 +8,13 @@
     "test:watch": "jest -w"
   },
   "devDependencies": {
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "prettier": "^1.18.2"
   },
   "dependencies": {
     "@abandonware/noble": "^1.9.2-5",
     "onoff": "^5.0.0",
+    "pigpio-client": "^1.2.0",
     "serialport": "^7.1.5",
     "spi-device": "^3.0.0"
   }
