@@ -5,11 +5,15 @@ const buttonCharacteristic = 'fe01';
 const ledCharacteristic = 'fe02';
 const buttonName = 't-rex-btn';
 
+function scanButton() {
+  console.log('Scanning...');
+  noble.startScanning([buttonService], true);
+}
+
 function init(clickListener, connectionListener = () => 0) {
   noble.on('stateChange', (state) => {
     if (state === 'poweredOn') {
-      console.log('Scanning...');
-      noble.startScanning([buttonService]);
+      scanButton();
     } else {
       noble.stopScanning();
     }
@@ -17,8 +21,11 @@ function init(clickListener, connectionListener = () => 0) {
 
   noble.on('discover', (peripheral) => {
     if (peripheral.advertisement.localName === buttonName) {
-      peripheral.connect(error => {
+      noble.stopScanning();
+      peripheral.connect((error) => {
         if (error) {
+          connectionListener(false);
+          scanButton();
           console.error(error);
           return;
         }
@@ -32,14 +39,16 @@ function init(clickListener, connectionListener = () => 0) {
         );
       });
 
-      function onServicesAndCharacteristicsDiscovered(error, services, [buttonNotifications, ledState]) {
+      function onServicesAndCharacteristicsDiscovered(
+        error,
+        services,
+        [buttonNotifications, ledState]
+      ) {
         if (error) {
           console.error(error);
           peripheral.disconnect();
           return;
         }
-
-        connectionListener(true);
 
         ledState.write(Buffer.from([1]));
         setTimeout(() => {
@@ -55,11 +64,12 @@ function init(clickListener, connectionListener = () => 0) {
         });
 
         // subscribe to be notified whenever the peripheral update the characteristic
-        buttonNotifications.subscribe(error => {
+        buttonNotifications.subscribe((error) => {
           if (error) {
             console.error('Error subscribing to echoCharacteristic');
             peripheral.disconnect();
           } else {
+            connectionListener(true);
             console.log('Subscribed for echoCharacteristic notifications');
           }
         });
@@ -67,8 +77,10 @@ function init(clickListener, connectionListener = () => 0) {
 
       peripheral.once('disconnect', () => {
         console.log('disconnected');
+        // Clean noble's peripheral cache
+        noble._peripherals = {};
         connectionListener(false);
-        noble.startScanning([buttonService]);
+        scanButton();
       });
     }
   });

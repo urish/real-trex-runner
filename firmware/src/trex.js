@@ -180,7 +180,8 @@ async function initGame() {
   gameIndex = 0;
 
   setTimeout(() => sound.playSound(SOUND_LEVELUP, 16), 2000);
-
+  updateStatus();
+  
   await motors.init();
   await sensor.init(onCactus);
   button.init(onClick, onButtonConnectionChange);
