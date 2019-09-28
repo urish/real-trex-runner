@@ -102,25 +102,26 @@ function doJump() {
   }, 1500);
 }
 
-function startGame() {
+async function startGame() {
+  startTime = new Date().getTime();
   clock.stop();
-  motors.trexDown()
   motors.startRails();
   if (gameOverTimer) {
     clearInterval(gameOverTimer);
     gameOverTimer = null;
   }
-  display.registerUpdate(() => {
-    display.clsw().then(() => {
-      display.registerUpdate(displayScore);
-    });  
-  });
+  const trexPromise = motors.trexDown();
+  await display.waitReady();
+  await display.clsw();
+  await display.waitReady();
+
   score = 0;
+  await displayScore();
+  await trexPromise;
   playing = true;
   jumping = false;
   goingDown = false;
   pendingJump = false;
-  startTime = new Date().getTime();
   lastCactusTime = 0;
   gameIndex++;
   updateStatus();
@@ -129,15 +130,16 @@ function startGame() {
 function endGame() {
   playing = false;
   gameDuration = new Date().getTime() - startTime;
+  startTime = null;
   motors.stopRails();
   updateStatus();
-  clock.start();
+  console.log('Game over!', gameIndex, gameDuration);
 }
 
 function onClick() {
   if (playing) {
     doJump();
-  } else {
+  } else if (startTime == null) {
     startGame();
   }
 }
@@ -149,18 +151,15 @@ function onButtonConnectionChange(value) {
 
 let lastCactusTime = 0;
 function onCactus(e) {
-  if (startTime && (e.time - startTime) < 0.1) {
-    return;
-  }
   if (jumping) {
     if (e.time - lastCactusTime > 0.1) {
+      lastCactusTime = e.time;
       score++;
       if (score % 10 === 0) {
         sound.playSound(SOUND_LEVELUP);
       }
       highscore.update(score);
       display.registerUpdate(displayScore);
-      lastCactusTime = e.time;
     }
   } else if (playing) {
     endGame();
@@ -169,7 +168,10 @@ function onCactus(e) {
     gameOverTimer = setTimeout(() => {
       motors.trexUp();
       display.registerUpdate(displayGameLogo);
-      gameOverTimer = null;
+      gameOverTime = setTimeout(() => {
+        clock.start();
+        gameOverTimer = null;
+      }, 3000);
     }, 3000);
   }
 }

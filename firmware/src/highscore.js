@@ -1,11 +1,13 @@
 const fs = require('fs');
 const filename = 'high.txt';
 
-let value;
+let value = 0;
 
 function init() {
-  const data = fs.readFileSync(filename);
-  value = data ? parseInt(data) : 0;
+  if (fs.existsSync(filename)) {
+    const data = fs.readFileSync(filename);
+    value = parseInt(data) || 0;
+  }
 }
 
 function get() {

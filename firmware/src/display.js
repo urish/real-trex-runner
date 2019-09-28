@@ -228,4 +228,5 @@ module.exports = {
   writeChar,
   displayFrame,
   registerUpdate,
+  waitReady,
 };

@@ -65,7 +65,7 @@ function init(clickListener, connectionListener = () => 0) {
         });
       }
 
-      peripheral.on('disconnect', () => {
+      peripheral.once('disconnect', () => {
         console.log('disconnected');
         connectionListener(false);
         noble.startScanning([buttonService]);
