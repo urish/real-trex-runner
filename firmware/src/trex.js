@@ -15,15 +15,16 @@ const button = require('./button');
 const clock = require('./clock');
 const display = require('./display');
 const highscore = require('./highscore');
-const jump = require('./jump');
 const motors = require('./motors');
 const sound = require('./sound');
+const status = require('./status');
 
 let playing = false;
 let startTime = null;
 let jumping = false;
 let goingDown = false;
 let pendingJump = false;
+let buttonConnected = false;
 let gameOverTimer = null;
 let score = 0;
 let gameIndex = 0;
@@ -33,6 +34,18 @@ let sensorWatcher = null;
 function startSensor() {
   if (sensorWatcher == null) {
     sensorWatcher = setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising', repeat: true });
+  }
+}
+
+function updateStatus() {
+  if (playing) {
+    status.setStatus(status.Status.on);
+    return;
+  }
+  if (buttonConnected) {
+    status.setStatus(status.Status.blinkFast);
+  } else {
+    status.setStatus(status.Status.blinkSlow);    
   }
 }
 
@@ -90,10 +103,10 @@ function doJump() {
   }
   sound.playSound(SOUND_JUMP, 30);
   jumping = true;
-  jump.jump();
+  motors.trexUp();
   setTimeout(() => {
     goingDown = true;
-    jump.goDown().then(() => {
+    motors.trexDown().then(() => {
       jumping = false;
       goingDown = false;
       if (pendingJump) {
@@ -106,8 +119,8 @@ function doJump() {
 
 function startGame() {
   clock.stop();
-  jump.goDown()
-  motors.start();
+  motors.trexDown()
+  motors.startRails();
   if (gameOverTimer) {
     clearInterval(gameOverTimer);
     gameOverTimer = null;
@@ -126,13 +139,15 @@ function startGame() {
   startTime = getTime();
   lastCactusTime = 0;
   gameIndex++;
+  updateStatus();
 }
 
 function endGame() {
   playing = false;
   gameDuration = getTime() - startTime;
   stopSensor();
-  motors.stop();
+  motors.stopRails();
+  updateStatus();
   clock.start();
 }
 
@@ -142,6 +157,11 @@ function onClick() {
   } else {
     startGame();
   }
+}
+
+function onButtonConnectionChange(value) {
+  buttonConnected = value;
+  updateStatus();
 }
 
 let lastCactusTime = getTime();
@@ -164,7 +184,7 @@ function onCactus(e) {
     sound.playSound(SOUND_GAMEOVER, 30);
     display.registerUpdate(displayGameOver);
     gameOverTimer = setTimeout(() => {
-      jump.jump();
+      motors.trexUp();
       display.registerUpdate(displayGameLogo);
       gameOverTimer = null;
     }, 3000);
@@ -174,21 +194,17 @@ function onCactus(e) {
 async function initGame() {
   gameIndex = 0;
 
-  sound.init();
-  await motors.init();
   setTimeout(() => sound.playSound(SOUND_LEVELUP, 16), 2000);
 
-  // Button
-  button.init(onClick);
-  jump.init();
-
+  await motors.init();
+  button.init(onClick, onButtonConnectionChange);
   highscore.init();
 
   // Display
   display.start();
   await display.initModule(display.LUT_PARTIAL_UPDATE);
   await display.clsw();
-  await displayGameLogo;
+  await displayGameLogo();
 }
 
 module.exports = {

@@ -2152,10 +2152,9 @@ pify@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-3.0.0.tgz#e5a4acd2c101fdf3d9a4d07f0dbc4db49dd28176"
 
-pigpio-client@^1.2.0:
+"pigpio-client@https://github.com/guymcswain/pigpio-client/#e208c275436d350878b5187836a5b98783dbbb65":
   version "1.2.0"
-  resolved "https://registry.yarnpkg.com/pigpio-client/-/pigpio-client-1.2.0.tgz#6031f30b35b7d49526032bd3bc1eb491392568e1"
-  integrity sha512-rUAQ0sIwTA1HL3swARt2wl6BlMy1OUkMcq6oU2hbzrW1ETnJp+97PQw0J/iNRpzteIBkYlaQDdn4kzLVa9FP7A==
+  resolved "https://github.com/guymcswain/pigpio-client/#e208c275436d350878b5187836a5b98783dbbb65"
 
 pinkie-promise@^2.0.0:
   version "2.0.1"
