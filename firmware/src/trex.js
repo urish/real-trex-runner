@@ -4,8 +4,6 @@
  * Copyright (C) 2017, 2018, 2019 Uri Shaked
  */
 
-HALL_SENSOR_PIN = D23;
-
 SOUND_JUMP = 1;
 SOUND_LEVELUP = 2;
 SOUND_GAMEOVER = 3;
@@ -16,6 +14,7 @@ const clock = require('./clock');
 const display = require('./display');
 const highscore = require('./highscore');
 const motors = require('./motors');
+const sensor = require('./sensor');
 const sound = require('./sound');
 const status = require('./status');
 
@@ -30,13 +29,6 @@ let score = 0;
 let gameIndex = 0;
 let gameDuration = 0;
 
-let sensorWatcher = null;
-function startSensor() {
-  if (sensorWatcher == null) {
-    sensorWatcher = setWatch(onCactus, HALL_SENSOR_PIN, { edge: 'rising', repeat: true });
-  }
-}
-
 function updateStatus() {
   if (playing) {
     status.setStatus(status.Status.on);
@@ -46,13 +38,6 @@ function updateStatus() {
     status.setStatus(status.Status.blinkFast);
   } else {
     status.setStatus(status.Status.blinkSlow);    
-  }
-}
-
-function stopSensor() {
-  if (sensorWatcher != null) {
-    clearWatch(sensorWatcher);
-    sensorWatcher = null;
   }
 }
 
@@ -128,7 +113,6 @@ function startGame() {
   display.registerUpdate(() => {
     display.clsw().then(() => {
       display.registerUpdate(displayScore);
-      startSensor();
     });  
   });
   score = 0;
@@ -136,7 +120,7 @@ function startGame() {
   jumping = false;
   goingDown = false;
   pendingJump = false;
-  startTime = getTime();
+  startTime = new Date().getTime();
   lastCactusTime = 0;
   gameIndex++;
   updateStatus();
@@ -144,8 +128,7 @@ function startGame() {
 
 function endGame() {
   playing = false;
-  gameDuration = getTime() - startTime;
-  stopSensor();
+  gameDuration = new Date().getTime() - startTime;
   motors.stopRails();
   updateStatus();
   clock.start();
@@ -164,7 +147,7 @@ function onButtonConnectionChange(value) {
   updateStatus();
 }
 
-let lastCactusTime = getTime();
+let lastCactusTime = 0;
 function onCactus(e) {
   if (startTime && (e.time - startTime) < 0.1) {
     return;
@@ -197,6 +180,7 @@ async function initGame() {
   setTimeout(() => sound.playSound(SOUND_LEVELUP, 16), 2000);
 
   await motors.init();
+  await sensor.init(onCactus);
   button.init(onClick, onButtonConnectionChange);
   highscore.init();
 
