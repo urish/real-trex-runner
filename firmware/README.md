@@ -29,24 +29,9 @@
 
    `cd /home/pi/real-trex-runner/firmware && yarn`
 
-6. Configure systemd to load the application on system start:
-
-   1. Create a file called `/lib/systemd/system/trex.service` with the following content:
-
-      ```
-      [Unit]
-      Description=T-Rex Game
-      After=local-fs.target sysinit.target
+6. Configure systemd to load the application on system start by copying all the files
+   from the `system` directory to `/lib/systemd/system`, and then run:
    
-      [Service]
-      ExecStart=/usr/bin/nodejs /home/pi/real-trex-runner/firmware/src/   trex.js
-      User=pi
-      Group=pi
-   
-      [Install]
-      WantedBy=basic.target
-      ```
-
-   2. Enable the new service by running `sudo systemctl enable trex`
+   `sudo systemctl enable pigpiod trex`
 
 7. Cross your fingers and reboot the Pi. 🤞

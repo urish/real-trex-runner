@@ -1,0 +1,13 @@
+[Unit]
+Description=T-Rex Game
+Requires=pigpiod.service
+After=local-fs.target sysinit.target pigpiod.service
+
+[Service]
+WorkingDirectory=/home/pi/real-trex-runner/firmware
+ExecStart=/usr/bin/nodejs /home/pi/real-trex-runner/firmware/src/trex.js
+User=pi
+Group=pi
+
+[Install]
+WantedBy=basic.target

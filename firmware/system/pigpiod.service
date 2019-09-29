@@ -1,0 +1,9 @@
+[Unit]
+Description=GPIO daemon
+
+[Service]
+ExecStart=/usr/bin/pigpiod -n 127.0.0.1
+Type=forking
+
+[Install]
+WantedBy=basic.target
