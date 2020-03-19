@@ -193,17 +193,15 @@ function clsw() {
     });
 }
 
-function writeChar(buf, w, h, offs, x) {
-  if (offs < 106 && offs + h > 106) {
-    const cutHeight = 106 - offs;
-    writeChar(buf.slice(0, cutHeight * (w >> 3)), w, cutHeight, offs, x);
-    writeChar(buf.slice(cutHeight * (w >> 3)), w, h - cutHeight, 106, x);
-    return;
+function writeChar(buf, w, h, offs = 0, x = 0) {
+  setMemoryArea(x, offs, w + x - 8 || 16, h || 16);
+  for (let y = 0; y < h; y++) {
+    setMemoryPointer(x, offs + y);
+    sendCommand(WRITE_RAM);
+    const len = parseInt(w / 8);
+    const start = y * len;
+    sendData(buf.slice(start, start + len));
   }
-  setMemoryArea(x || 0, offs || 0, (w + x - 8) || 16, h || 16);
-  setMemoryPointer(x || 0, offs || 0);
-  sendCommand(WRITE_RAM);
-  sendData(buf);
 }
 
 function registerUpdate(updateCallback) {

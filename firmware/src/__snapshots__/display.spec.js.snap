@@ -1,0 +1,1877 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`display module writeChar should display the given buffer to the screen, line by line 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            68,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            2,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            69,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            19,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            255,
+            0,
+            127,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            1,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            255,
+            0,
+            127,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            2,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            248,
+            0,
+            15,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            3,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            248,
+            0,
+            15,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            4,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            248,
+            0,
+            15,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            5,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            199,
+            255,
+            129,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            6,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            199,
+            255,
+            129,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            7,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            199,
+            255,
+            129,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            8,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            199,
+            255,
+            241,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            9,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            199,
+            255,
+            241,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            10,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            192,
+            255,
+            241,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            11,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            192,
+            255,
+            241,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            12,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            192,
+            0,
+            1,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            13,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            248,
+            0,
+            15,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            14,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            248,
+            0,
+            15,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            15,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            255,
+            0,
+            127,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            16,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            255,
+            0,
+            127,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            17,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            255,
+            0,
+            127,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            78,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            79,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            18,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            0,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 1,
+        "sendBuffer": Object {
+          "data": Array [
+            36,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "byteLength": 3,
+        "sendBuffer": Object {
+          "data": Array [
+            255,
+            255,
+            255,
+          ],
+          "type": "Buffer",
+        },
+      },
+    ],
+  ],
+]
+`;
