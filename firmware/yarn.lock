@@ -1839,6 +1839,11 @@ nan@^2.13.2, nan@^2.14.0:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.0.tgz#7818f722027b2459a86f0295d434d1fc2336c52c"
   integrity sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
 
+nan@^2.14.2:
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.15.0.tgz#3f34a473ff18e15c1b5626b62903b5ad6e665fee"
+  integrity sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==
+
 nan@^2.3.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.7.0.tgz#d95bf721ec877e08db276ed3fc6eb78f9083ad46"
@@ -2556,13 +2561,13 @@ spdx-license-ids@^1.0.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-1.2.2.tgz#c9df7a3424594ade6bd11900d596696dc06bac57"
 
-spi-device@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/spi-device/-/spi-device-3.0.0.tgz#6d8bbe69263747876390e5b4c3f087e752727d7b"
-  integrity sha512-W3qfqwLFrOjmAfnrj8XEQHGXNkpJpoP6cFiJIfGO06D5s0ClrTxtDm5ilEpJDxw7bMa+YoCqNPOPBVSBMLCSFA==
+spi-device@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/spi-device/-/spi-device-3.1.2.tgz#ba0f4b79638e8cb9a64840fe38176666cffb482e"
+  integrity sha512-5ubnDcpFjMAiO32j7Jrg/EMSmnInoh9LFzh/abVSJxTjCbmUQdRDVgNG5mRlOpMZc+SCHNSzqKVHGe8n0mVKwA==
   dependencies:
     bindings "^1.5.0"
-    nan "^2.14.0"
+    nan "^2.14.2"
 
 sprintf-js@~1.0.2:
   version "1.0.3"
