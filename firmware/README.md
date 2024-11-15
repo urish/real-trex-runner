@@ -1,37 +1,23 @@
-# T-Rex Game Firmware for Raspberry Pi
+# T-Rex Game Firmware for Raspberry Pi Pico
 
-## Installation
+## Pinout
 
-1. Enable the serial port and the SPI interface:
-   1. Run `sudo raspi-config`
-   2. Go to "5 - Interfacing Options"
-   3. Select "P4 SPI" and then answer "Yes" to enable SPI
-   4. Select "P6 Serial" and answer "No" for the first question (shell accessible over serial), and "Yes" to the second question (enable the serial port hardware)
-
-   The serial port is used by the sound module, and the SPI interface is used by the display.
-
-2. Configure the Pi to disable the stepper motors and turn the LED on when booting. Add the following lines at the end of `/boot/config.txt`:
-
-   ```
-   # T-Rex default pin configuration
-   gpio=4=op,dl
-   gpio=27=op,dl
-   gpio=6=op,dl
-   ```
-
-3. Install yarn and nodejs, as [explained here](https://yarnpkg.com/lang/en/docs/install/#debian-stable)
-  
-4. Git clone this repository:
-
-   `cd /home/pi && git clone https://github.com/urish/real-trex-runner/`
-
-5. Install all dependencies using yarn:
-
-   `cd /home/pi/real-trex-runner/firmware && yarn`
-
-6. Configure systemd to load the application on system start by copying all the files
-   from the `system` directory to `/lib/systemd/system`, and then run:
-   
-   `sudo systemctl enable pigpiod trex`
-
-7. Cross your fingers and reboot the Pi. 🤞
+| GPIO | Peripheral    | Pin  |
+| ---- | ------------- | ---- |
+| 2    | Status LED    |      |
+| 3    | WS2812 LED    | DIN  |
+| 4    | DFPlayer      | RX   |
+| 5    | E-Paper       | CS   |
+| 6    | E-Paper       | CLK  |
+| 7    | E-Paper       | DIN  |
+| 8    | E-Paper       | DC   |
+| 9    | E-Paper       | RST  |
+| 10   | E-Paper       | BUSY |
+| 11   | KY-024 Sensor | DO   |
+| 12   | Rail Motors   | nSLP |
+| 13   | Rail Motors   | DIR  |
+| 14   | Rail Motors   | STEP |
+| 15   | Jump Motor    | nSLP |
+| 16   | Jump Motor    | DIR  |
+| 17   | Jump Motor    | STEP |
+| 18   | Button        | IN   |
